@@ -20,12 +20,10 @@ void *mem_use_loc[MAX_CALLING_PAGE_NUM];
 
 int mem_for_struct_m_list;
 
-void clean_size_0(int p,int i)
-{
+void clean_size_0(int p, int i) {
 	int k;
-	for(k=i;k< __num_chunk__[p];k++)
-	{
-		mlist[p][k] = mlist[p][k+1];
+	for (k = i; k < __num_chunk__[p]; k++) {
+		mlist[p][k] = mlist[p][k + 1];
 	}
 	__num_chunk__[p] -= 1;
 }
@@ -51,8 +49,6 @@ int activate_new_page(int page_num) {
 		perror("mmap failed\n");
 		return 1;
 	}
-
-
 
 	__num_chunk__[page_num] = 0;
 	__mem_size__[page_num] = PAGESIZE;
@@ -81,7 +77,8 @@ void* alloc_at_page(int page_num, int req_size) {
 			mlist[page_num][__num_chunk__[page_num]].size = req_size;
 			mlist[page_num][__num_chunk__[page_num]].avail = 0;
 			mlist[page_num][i].size -= req_size;
-			if(mlist[page_num][i].size==0) clean_size_0(page_num,i);
+			if (mlist[page_num][i].size == 0)
+				clean_size_0(page_num, i);
 
 			break;
 		}
@@ -97,7 +94,8 @@ void* alloc_at_page(int page_num, int req_size) {
 
 int dealloc_merge(int page_num, int i, int mode) {
 	int j, k;
-	if(mode==1 && mlist[page_num][i].avail == 0) return 3;
+	if (mode == 1 && mlist[page_num][i].avail == 0)
+		return 3;
 
 	for (j = 0; j < __num_chunk__[page_num] + 1; j++) {
 		if (mlist[page_num][j].avail == 0)
@@ -129,10 +127,10 @@ int dealloc_merge(int page_num, int i, int mode) {
 
 void init_alloc() {
 
-	mem_for_struct_m_list = ((PAGESIZE / MINALLOC)+1) * sizeof(m_list);
+	mem_for_struct_m_list = ((PAGESIZE / MINALLOC) + 1) * sizeof(m_list);
 
-	mem_init_loc = mmap(0, mem_for_struct_m_list * MAX_CALLING_PAGE_NUM, PROT_READ | PROT_WRITE,
-			MAP_PRIVATE | MAP_ANONYMOUS, 0, 0);
+	mem_init_loc = mmap(0, mem_for_struct_m_list * MAX_CALLING_PAGE_NUM,
+			PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, 0, 0);
 	if (mem_init_loc == MAP_FAILED) {
 		perror("mmap failed\n");
 		return;
@@ -153,21 +151,21 @@ void init_alloc() {
 	__page_num__ = -1;
 	unsigned int __current_active_page__ = -1;
 
-
 	return;
 }
 void cleanup() {
 	int stat_check;
-	stat_check = munmap(mem_init_loc,mem_for_struct_m_list* MAX_CALLING_PAGE_NUM);
-	if(stat_check==-1) perror("munmap fail");
+	stat_check = munmap(mem_init_loc,
+			mem_for_struct_m_list * MAX_CALLING_PAGE_NUM);
+	if (stat_check == -1)
+		perror("munmap fail");
 
 	int i;
-	for(i=0;i<=__page_num__;i++)
-	{
-		stat_check = munmap(mem_use_loc[i],PAGESIZE);
-		if(stat_check==-1) perror("munmap fail");
+	for (i = 0; i <= __page_num__; i++) {
+		stat_check = munmap(mem_use_loc[i], PAGESIZE);
+		if (stat_check == -1)
+			perror("munmap fail");
 	}
-
 
 }
 char* alloc(int req_size) {
@@ -228,12 +226,11 @@ void dealloc(char *dealloc_base) {
 		for (i = 0; i < __num_chunk__[p] + 1; i++) {
 			if (mlist[p][i].avail == 0 && mlist[p][i].base == dealloc_base) {
 
-
 				__mem_size__[p] += mlist[p][i].size;
 
-				if (dealloc_merge(p, i,0) > 0) {
+				if (dealloc_merge(p, i, 0) > 0) {
 					for (j = __num_chunk__[p]; j >= 0; j--)
-						dealloc_merge(p, j,1);
+						dealloc_merge(p, j, 1);
 					return;
 				}
 
