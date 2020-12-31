@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo ./ddos.out
+sudo ./attack.out

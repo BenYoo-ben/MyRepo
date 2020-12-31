@@ -1,18 +1,15 @@
-#include <stdio.h>
-#include <cstdio>
-#include <stdlib.h>
-#include <string.h>
+#include "header.h"
 
 #include "icmp_flood.h"
 #include "syn_flood.h"
+#include "udp_flood.h"
+#include "conn_flood.h"
 
-#define __SIZE_OF_INPUT__ 100
-#define __MAX_TOKEN_NUM__ 10
+#define __SIZE_OF_INPUT__ 200
+#define __MAX_TOKEN_NUM__ 20
 
 char input[__SIZE_OF_INPUT__];
 char *tokens[__MAX_TOKEN_NUM__];
-
-
 
 void get_input() {
 	printf("$ ");
@@ -22,7 +19,7 @@ void get_input() {
 void make_tokens() {
 	int i = 0;
 	for (i = 0; i < __MAX_TOKEN_NUM__; i++)
-		tokens[i] = 0;
+		tokens[i] = NULL;
 	i = 0;
 
 	tokens[i] = strtok(input, " ");
@@ -74,40 +71,51 @@ int type_choose_menu() {
 }
 
 int main(void) {
-int mode;
+	int mode;
 
 	while (1) {
-		switch (type_choose_menu()) {
-		case 1:
-			break; //header buffering
-		case 2:
-			break; //body buffering
-		case 3:
-			break; //response buffering
-		case 4:
-			break; //connection flooding
-		case 5:
-			break; //get flooding
+		int type = type_choose_menu();
+
+		switch (type) {
+		case 1:		//header buffering
+			break; 
+		case 2:		//body buffering
+			break; 
+		case 3:		//response buffering
+			break; 
+		case 4:		//connection flooding
+			mode = choose_running_type();
+			conn_flood_print_usage(mode);
+			get_input();
+			make_tokens();
+			conn_flood_run(tokens,mode);
+			break;
+		case 5:		//get flooding
+			break; 
 		case 6:
 			mode = choose_running_type();
 			syn_flood_print_usage(mode);
 			get_input();
 			make_tokens();
-			syn_flood_run(tokens,mode);
+			syn_flood_run(tokens, mode);
 			break;
-		case 7:
-			break; //UDP flooding
-		case 8:
+		case 7:		//UDP flooding
+			udp_flood_print_usage();
+			get_input();
+			make_tokens();
+			udp_flood_run(tokens);
+			break; 
+		case 8:		//ICMP flooding
 			mode = choose_running_type();
 			icmp_flood_print_usage(mode);
 			get_input();
 			make_tokens();
-			icmp_flood_run(tokens,mode);
-			break; //ICMP flooding
-		case 9:
-			break; //Hash Dos
-		case 10:
-			break; //Ref Ref
+			icmp_flood_run(tokens, mode);
+			break; 
+		case 9:		//Hash Dos
+			break;
+		case 10:	//Ref Ref
+			break;
 
 		}
 

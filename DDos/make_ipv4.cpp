@@ -1,12 +1,4 @@
-#include <netinet/ip.h>
-#include <netinet/tcp.h>
-#include <math.h>
-#include <arpa/inet.h>
-#include <sys/socket.h>
-#include <string.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
+#include "header.h"
 
 #include "make_ipv4.h"
 
@@ -49,7 +41,8 @@ struct iphdr ipv4_set_daddr(struct iphdr ip_head, __u32 daddr) {
 struct iphdr ipv4_add_size(struct iphdr ip_head, __u32 data_size) {
 	ip_head.tot_len += data_size;
 
-	ip_head.check = in_cksum((unsigned short*) &ip_head, sizeof(struct iphdr)+ data_size);
+	ip_head.check = in_cksum((unsigned short*) &ip_head,
+			sizeof(struct iphdr) + data_size);
 	return ip_head;
 }
 
@@ -60,6 +53,9 @@ char* packet_assemble(struct iphdr ip_head, void *data, __u32 data_size) {
 	memcpy((char*) packet + sizeof(ip_head), (char*) data, data_size);
 	return packet;
 }
+
+
+
 
 int make_socket(int PROTOCOL) {
 	int sock;
@@ -95,7 +91,7 @@ void send_packet(int sock, struct iphdr ip_head, char *packet, int port) {
 		perror("sendto() error");
 		exit(-1);
 	}
-		//printf(" sendto() is OK\n");
+	//printf(" sendto() is OK\n");
 }
 
 __u16 in_cksum(unsigned short *ptr, int nbytes) {
@@ -167,3 +163,6 @@ void next_ip_addr(char *current, __u8 offset) {
 	strcpy(current, ips_c);
 
 }
+
+
+
