@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) {
-	Global.PORT = 45000+(int)(Math.random()*10000);
+	Global.PORT = 65432;
 		Game g = new Game();
 	
 		//new Game().makeSongset("D:\\test\\", "D:","TestFile.by");
@@ -37,7 +37,7 @@ public class Main {
 				break;
 			case 5:
 				SongClient  c = new SongClient();
-				c.prepareClient("127.0.0.1", Global.PORT);
+				c.prepareClient("192.168.56.1", 65432);
 				c.send();
 			}
 		}

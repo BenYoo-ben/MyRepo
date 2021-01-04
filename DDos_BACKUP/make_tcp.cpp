@@ -152,6 +152,135 @@ int tcp_make_connection(__u32 src_ip, __u32 dest_ip, int src_port, int dest_port
 		perror("connect failed\n");
 		exit(1);
 	}
+
 	return 0;
+}
+
+void tcp_send_syn(int sock,int seq,__u32 src_ip, __u32 dest_ip, int src_port, int dest_port)
+{
+	struct iphdr ipv4_h;
+	ipv4_h = prepare_empty_ipv4();
+	ipv4_h = ipv4_set_protocol(ipv4_h, IPPROTO_TCP);
+	ipv4_h = ipv4_set_saddr(ipv4_h, src_ip);
+
+	//modify tcpsyn_src_ip, increment 1.
+	//next_ip_addr(tcpsyn_src_ip, 1);
+
+	ipv4_h = ipv4_set_daddr(ipv4_h, dest_ip);
+
+	struct tcphdr tcp_h;
+	tcp_h = prepare_empty_tcp();
+	tcp_h = tcp_set_source(tcp_h, src_port);
+	tcp_h = tcp_set_dest(tcp_h, dest_port);
+
+	tcp_h = tcp_set_seq(tcp_h, seq);
+	//tcp_h = tcp_set_ack_seq(tcp_h,35623);
+
+	tcp_h = tcp_set_syn_flag(tcp_h);
+
+	tcp_h = tcp_get_checksum(ipv4_h, tcp_h,NULL, 0);
+
+	ipv4_h = ipv4_add_size(ipv4_h, sizeof(tcp_h));
+	char *packet = packet_assemble(ipv4_h, &tcp_h, sizeof(tcp_h));
+
+	send_packet(sock, ipv4_h, packet,dest_port);
+
+	free(packet);
+}
+void tcp_send_ack(int sock,int seq,int syn_ack_seq,__u32 src_ip, __u32 dest_ip, int src_port, int dest_port)
+{
+	struct iphdr ipv4_h;
+	ipv4_h = prepare_empty_ipv4();
+	ipv4_h = ipv4_set_protocol(ipv4_h, IPPROTO_TCP);
+	ipv4_h = ipv4_set_saddr(ipv4_h, src_ip);
+	ipv4_h = ipv4_set_daddr(ipv4_h,dest_ip);
+
+
+	struct tcphdr tcp_h;
+	tcp_h = prepare_empty_tcp();
+	tcp_h = tcp_set_source(tcp_h,src_port);
+	tcp_h = tcp_set_dest(tcp_h, dest_port);
+	tcp_h = tcp_set_seq(tcp_h, seq+1);
+
+
+	tcp_h = tcp_set_ack_seq(tcp_h,syn_ack_seq+1);
+
+	tcp_h = tcp_set_ack_flag(tcp_h);
+
+	tcp_h = tcp_get_checksum(ipv4_h, tcp_h,NULL, 0);
+
+	ipv4_h = ipv4_add_size(ipv4_h, sizeof(tcp_h));
+	char *packet = packet_assemble(ipv4_h, &tcp_h, sizeof(tcp_h));
+
+	send_packet(sock, ipv4_h, packet, dest_port);
+	free(packet);
+}
+
+
+int tcp_make_pseudo_connection(__u32 src_ip, __u32 dest_ip, int src_port, int dest_port)
+{
+	int sock = make_socket(IPPROTO_TCP);
+
+	struct iphdr ipv4_h;
+	ipv4_h = prepare_empty_ipv4();
+	ipv4_h = ipv4_set_protocol(ipv4_h, IPPROTO_TCP);
+	ipv4_h = ipv4_set_saddr(ipv4_h, src_ip);
+
+	//modify tcpsyn_src_ip, increment 1.
+	//next_ip_addr(tcpsyn_src_ip, 1);
+
+	ipv4_h = ipv4_set_daddr(ipv4_h, dest_ip);
+
+	struct tcphdr tcp_h;
+	tcp_h = prepare_empty_tcp();
+	tcp_h = tcp_set_source(tcp_h, src_port);
+	tcp_h = tcp_set_dest(tcp_h, dest_port);
+	int seq = (int)(rand()%__UINT_MAXIMUM__);
+	tcp_h = tcp_set_seq(tcp_h, seq);
+	//tcp_h = tcp_set_ack_seq(tcp_h,35623);
+
+	tcp_h = tcp_set_syn_flag(tcp_h);
+
+	tcp_h = tcp_get_checksum(ipv4_h, tcp_h,NULL, 0);
+
+	ipv4_h = ipv4_add_size(ipv4_h, sizeof(tcp_h));
+	char *packet = packet_assemble(ipv4_h, &tcp_h, sizeof(tcp_h));
+
+	send_packet(sock, ipv4_h, packet,dest_port);
+
+	free(packet);
+
+	struct timespec specs = {0};
+	specs.tv_nsec = 500 * 1000000;
+
+
+	nanosleep(&specs,NULL);
+
+	ipv4_h = prepare_empty_ipv4();
+	ipv4_h = ipv4_set_protocol(ipv4_h, IPPROTO_TCP);
+	ipv4_h = ipv4_set_saddr(ipv4_h, src_ip);
+	ipv4_h = ipv4_set_daddr(ipv4_h,dest_ip);
+
+
+
+	tcp_h = prepare_empty_tcp();
+	tcp_h = tcp_set_source(tcp_h,src_port);
+	tcp_h = tcp_set_dest(tcp_h, dest_port);
+	tcp_h = tcp_set_seq(tcp_h, seq+1);
+
+	int syn_ack_seq = (int)(rand()%__UINT_MAXIMUM__);
+
+	tcp_h = tcp_set_ack_seq(tcp_h,syn_ack_seq+1);
+
+	tcp_h = tcp_set_ack_flag(tcp_h);
+
+	tcp_h = tcp_get_checksum(ipv4_h, tcp_h,NULL, 0);
+
+	ipv4_h = ipv4_add_size(ipv4_h, sizeof(tcp_h));
+	packet = packet_assemble(ipv4_h, &tcp_h, sizeof(tcp_h));
+
+	send_packet(sock, ipv4_h, packet, dest_port);
+	free(packet);
+
 }
 
