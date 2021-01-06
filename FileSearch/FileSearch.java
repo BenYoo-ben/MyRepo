@@ -634,7 +634,7 @@ class SearchFrame extends JFrame
 	
 	private void setScreen(double size)
 	{
-		this.setTitle("20162483/Searching");
+		this.setTitle("Searching...");
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		double width = screenSize.getWidth();
 		double height = screenSize.getHeight();
