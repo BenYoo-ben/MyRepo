@@ -224,8 +224,6 @@ void* generate_conn_flooding4(void *data) {
 	clock_t thread_clock;
 	while (1) {
 
-
-
 		pthread_mutex_lock(&conn_mutex);
 		thread_clock = clock();
 
@@ -271,9 +269,9 @@ void* generate_conn_flooding4(void *data) {
 		conn_total++;
 		conn_generated_count++;
 
-		char Request[]
-		 = "GET / HTTP/1.1\r\nHost: www.google.co.kr\r\n\r\n";
-		send(sock,Request,100,0);
+		//char Request[]
+		// = "GET / HTTP/1.1\r\nHost: www.google.co.kr\r\n\r\n";
+		//send(sock,Request,100,0);
 		//conn_dest_port++;
 
 		close(sock);

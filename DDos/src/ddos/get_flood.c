@@ -224,8 +224,6 @@ void get_flood_run(char *argv[], int mode) {
 	generate_thread = (pthread_t*) malloc(
 			sizeof(pthread_t) * (num_threads + 1));
 
-
-
 	int i;
 
 	printf("Sending get requests to %s using %d threads\n", get_dest_ip,
