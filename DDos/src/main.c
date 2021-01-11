@@ -1,10 +1,11 @@
 #include "header.h"
 
+#include "ddos/get_flood.h"
 #include "ddos/icmp_flood.h"
 #include "ddos/syn_flood.h"
 #include "ddos/udp_flood.h"
 #include "ddos/conn_flood.h"
-#include "ddos/get_flood.h"
+#include "ddos/hash_dos.h"
 
 #define __SIZE_OF_INPUT__ 200
 #define __MAX_TOKEN_NUM__ 20
@@ -98,7 +99,7 @@ int main(void) {
 			make_tokens();
 			get_flood_run(tokens,mode);
 			break; 
-		case 6:
+		case 6: //syn flooding
 			mode = choose_running_type();
 			syn_flood_print_usage(mode);
 			get_input();
@@ -119,6 +120,11 @@ int main(void) {
 			icmp_flood_run(tokens, mode);
 			break; 
 		case 9:		//Hash Dos
+			mode = choose_running_type();
+			hash_dos_print_usage(mode);
+			get_input();
+			make_tokens();
+			hash_dos_run(tokens, mode);
 			break;
 		case 10:	//Ref Ref
 			break;
