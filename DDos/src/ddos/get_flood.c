@@ -42,8 +42,6 @@ void* generate_get_flooding1(void *data) {
 	int thread_id = *((int*) data);
 	clock_t thread_clock;
 
-
-
 		while (1) {
 
 		pthread_mutex_lock(&get_mutex);

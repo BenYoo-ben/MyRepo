@@ -99,7 +99,7 @@ int main(void) {
 			make_tokens();
 			get_flood_run(tokens,mode);
 			break; 
-		case 6: //syn flooding
+		case 6:
 			mode = choose_running_type();
 			syn_flood_print_usage(mode);
 			get_input();
@@ -120,11 +120,10 @@ int main(void) {
 			icmp_flood_run(tokens, mode);
 			break; 
 		case 9:		//Hash Dos
-			mode = choose_running_type();
-			hash_dos_print_usage(mode);
+			hash_dos_print_usage();
 			get_input();
 			make_tokens();
-			hash_dos_run(tokens, mode);
+			hash_dos_run(tokens);
 			break;
 		case 10:	//Ref Ref
 			break;
