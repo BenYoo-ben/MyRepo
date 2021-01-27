@@ -99,7 +99,6 @@ void* generate_icmp_request2(void *data) {
 
 		memset(buffer, 0x00, sizeof(struct icmp));
 
-		printf("Mask : %d , nowip : %s\n",mask,icmp_now_ip);
 		struct iphdr ipv4_h;
 		ipv4_h = prepare_empty_ipv4();
 		ipv4_h = ipv4_set_protocol(ipv4_h, IPPROTO_ICMP);
