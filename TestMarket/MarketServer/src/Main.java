@@ -6,6 +6,9 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
+			JDBMS db = new JDBMS();
+			db.PrepareDB();
+		
 			TCPHandler tcp_handle = new TCPHandler();
 			if(tcp_handle.OpenServer()!=0)
 				GlobalVar.perror("Server open failure");
