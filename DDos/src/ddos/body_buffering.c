@@ -39,7 +39,7 @@ void body_buffering_print_usage(int mode) {
 
 	if (mode == 1)
 		printf(
-				"header buffering Usage : [Src-IP] [Dest-IP] [# thread] [# attacks(0 for INF)] [Src-Port] [Dest-Port] \n");
+				"body buffering Usage : [Src-IP] [Dest-IP] [# thread] [# attacks(0 for INF)] [Src-Port] [Dest-Port] \n");
 }
 
 void* generate_body_buffering1(void *data) {
@@ -314,9 +314,6 @@ void body_buffering_run(char *argv[], int mode) {
 
 	free(generate_thread_id);
 	free(generate_thread);
-	free(bodybuffer_src_ip);
-	free(bodybuffer_dest_ip);
-	free(bodybuffer_sockets);
-	free(bodybuffer_clocks);
+
 	return;
 }
