@@ -1,3 +1,4 @@
+import java.util.Scanner;
 
 public class Main {
 
@@ -6,8 +7,19 @@ public class Main {
 		TCPHandler tcp_handler = new TCPHandler();
 		
 		tcp_handler.MakeConnection();
-		byte[] test = tcp_handler.Receive();
-		System.out.println("Received:\n"+new String(test));
+		Scanner sc = new Scanner(System.in);
+		
+		
+		while(true)
+		{
+			String s = sc.nextLine();
+			tcp_handler.Send(s.getBytes());
+			byte[] b = tcp_handler.Receive();
+			System.out.println("RECVD : \n"+new String(b));
+		}
+		
+		
+		
 	}
 
 }

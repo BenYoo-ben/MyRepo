@@ -2,8 +2,8 @@
 public class GlobalVar {
 	
 	
-	static int server_port = 54321;
-	static String server_ip = "127.0.0.1";
+	static int server_port = 55551;
+	static String server_ip = "192.168.0.5";
 
 	
 	
