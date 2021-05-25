@@ -65,11 +65,10 @@ func getPort() uint16{
 
     
 }
-
+//go docs : fmt, bufio, net, os
 func ClientHandler(con net.Conn) {
-   var str string
-   fmt.Fscanf(con,"%s",str)
-
-   fmt.Println(">",str)
-
+//   var str string
+    recvBuf := make([]byte,1024)
+   con.Read(recvBuf[:])
+    fmt.Println(">>",string(recvBuf))
 }

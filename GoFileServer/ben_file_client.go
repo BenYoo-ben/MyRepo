@@ -23,7 +23,37 @@ func main(){
     fmt.Println("Error on Dialing :",err.Error())
     os.Exit(1)
    }else{
-   fmt.Fprintf(conn_socket,"Hello Server!") 
+   /* str := "HEELO"
+    data := []byte(str)
+    conn_socket.Write(data)*/
+
+    
+    fmt.Println("Input FileName:")
+    var filename string
+    fmt.Scanf("%s",&filename)
+
+
+    folderInfo, err := os.Stat("./storage/"+filename)
+    if os.IsNotExist(err) {
+        fmt.Println("File Not Exist",err.Error())
+        os.Exit(1)
+    }else {
+        fmt.Println(folderInfo)
+    }
+    
+    fmt.Println("Choose action:\n1. Upload\n2.Download")
+    var decision string
+    fmt.Scanf("%s",&decision)
+
+    conn_socket.Write([]byte(decision))
+    
+    if(decision=="1"){
+    
+    
+    }else if(decision=="2"){
+    
+    }
+
    }
 
 }
