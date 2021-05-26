@@ -6,6 +6,11 @@ import(
     "os"
     "bufio"
     "strconv"
+	"io"
+)
+
+const (
+	FBUFFER_SIZE = 1024		
 )
 
 func main(){
@@ -41,14 +46,31 @@ func main(){
         fmt.Println(folderInfo)
     }
     
-    fmt.Println("Choose action:\n1. Upload\n2.Download")
+    fmt.Println("Choose action:\n1. Upload\n2.Download\n")
     var decision string
     fmt.Scanf("%s",&decision)
 
     conn_socket.Write([]byte(decision))
     
     if(decision=="1"){
-    
+		 fmt.Println("Input filename to get:")
+		 fmt.Scanf("%s",&decision)
+
+		 file, err := os.Create("storage/D"+string(decision))
+		 defer file.Close()
+		 if err != nil{
+			fmt.Println("Error creating file.")
+			os.Exit(1)
+		 }else{
+	//		fileBuffer := make([]byte, FBUFFER_SIZE)
+			 conn_socket.Write([]byte(decision))
+			io.Copy(file,conn_socket)
+			os.Exit(0)
+		 }
+		 
+
+		 
+
     
     }else if(decision=="2"){
     
@@ -70,7 +92,7 @@ func getPort() uint16{
     var num uint16
     i := 0
     for {
-        if(tmp_bytes[i]==10){
+        if(tmp_bytes[i]==10 || tmp_bytes[i]==13){
             return num
         }else{
             num= num*10 + uint16(tmp_bytes[i]-'0')
