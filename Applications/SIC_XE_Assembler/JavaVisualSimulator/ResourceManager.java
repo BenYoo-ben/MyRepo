@@ -3,6 +3,7 @@ package SP20_simulator;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * ResourceManager는 컴퓨터의 가상 리소스들을 선언하고 관리하는 클래스이다. 크게 네가지의 가상 자원 공간을 선언하고, 이를
@@ -34,12 +35,41 @@ public class ResourceManager {
 
 	SymbolTable symtabList;
 	// 이외에도 필요한 변수 선언해서 사용할 것.
-
+	
+	List<String> program_names = new ArrayList<>();
+	List<Integer> starting_addresses =  new ArrayList<>();
+	List<Integer> program_lengths = new ArrayList<>();
+	
+	int first_executable_addr = 0;
+	
 	/**
 	 * 메모리, 레지스터등 가상 리소스들을 초기화한다.
 	 */
+	interface REG_NUM{
+		final char A = 0;
+		final char X = 1;
+		final char L = 2;
+		final char PC = 8;
+		final char SW = 9;
+		final char B = 3;
+		final char S = 4;
+		final char T = 5;
+		final char F = 6;
+		
+	}
+	
 	public void initializeResource() {
-
+		for(int i=0;i<memory.length;i++)
+			memory[i] = 0;
+		
+		for(int i=0;i<register.length;i++)
+			register[i] = 0;
+		
+		symtabList = new SymbolTable();
+		symtabList.addressList = new ArrayList<>();
+		symtabList.symbolList = new ArrayList<>();
+		
+		
 	}
 
 	/**
@@ -91,8 +121,15 @@ public class ResourceManager {
 	 * @return 가져오는 데이터
 	 */
 	public char[] getMemory(int location, int num) {
-		return null;
-
+		
+		char[] t = new char[num];
+		
+		for(int i=0;i<num;i++)
+		{
+			t[i] = memory[location+i];
+		}
+		
+		return t;
 	}
 
 	/**
@@ -103,6 +140,10 @@ public class ResourceManager {
 	 * @param num    저장하는 데이터의 개수
 	 */
 	public void setMemory(int locate, char[] data, int num) {
+		
+		for (int i = 0; i < num; i++) {
+			memory[locate+ i] =data[i];
+		}
 
 	}
 
@@ -113,7 +154,8 @@ public class ResourceManager {
 	 * @return 레지스터가 소지한 값
 	 */
 	public int getRegister(int regNum) {
-		return 0;
+		
+		return this.register[regNum];
 
 	}
 
@@ -125,6 +167,8 @@ public class ResourceManager {
 	 */
 	public void setRegister(int regNum, int value) {
 
+		this.register[regNum] = value;
+		
 	}
 
 	/**
@@ -144,6 +188,12 @@ public class ResourceManager {
 	 * @return
 	 */
 	public int byteToInt(byte[] data) {
+		
 		return 0;
+	}
+	
+	public ResourceManager()
+	{
+		initializeResource();
 	}
 }
