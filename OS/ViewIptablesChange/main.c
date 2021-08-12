@@ -10,10 +10,14 @@
 int main(int argc, char *argv[])
 {
     int sleep_sec = 3;
-    if(argc==2)
+    char *iptables_loc = "/sbin/iptables";
+    if(argc>=2){
         sleep_sec = atoi(argv[1]);
-        
-    
+        iptables_loc = argv[2];
+        }
+        else{
+        printf("using iptables in /sbin/iptables...\nspecify other location if not working...\n%s [sleep time/sec] [iptables location]\n\n",argv[0]);
+    }
     pid_t pid;
     char buffer[__BUF_SIZE__];
     char prev_buffer[__BUF_SIZE__];
@@ -45,7 +49,7 @@ int main(int argc, char *argv[])
         close(pipe_link[1]);
 
 //        printf("%d\n",flag);
-        execl("/sbin/iptables","iptables","-L","-nv",(char *)0);
+        execl(iptables_loc,"iptables","-L","-nv",(char *)0);
 
         exit(0);
     }else{
