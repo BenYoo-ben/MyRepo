@@ -31,12 +31,12 @@ int main(int argc, char *argv[]) {
 	//clearing dummy data with 0.
 
 	memset(buffer,0x0,__BUF_SIZE__);
-	memset(prev_buffer,0x0,__BUf_SIZE__);
+	memset(prev_buffer,0x0,__BUF_SIZE__);
 
 
 	//len variables, and flag
-	short prev_len = -1;
-	short len = -1;
+	short prev_len = 0;
+	short len = 0;
 	//flag is more like count in this code.
 	int flag = 0;
 
@@ -78,7 +78,8 @@ int main(int argc, char *argv[]) {
 			close(pipe_link[1]);
 
 			//read from redirected stdout --> pipe[0].
-			int len = read(pipe_link[0], buffer, sizeof(buffer));
+
+			len = read(pipe_link[0], buffer, sizeof(buffer));
 
 			close(pipe_link[0]);
 
@@ -127,9 +128,12 @@ int main(int argc, char *argv[]) {
 
 			}
 
+
 			//clear and copy data.
 			memset(prev_buffer, 0x0, prev_len);
+
 			memcpy(prev_buffer, buffer, len);
+
 			memset(buffer, 0x0, len);
 			prev_len = len;
 			flag++;
