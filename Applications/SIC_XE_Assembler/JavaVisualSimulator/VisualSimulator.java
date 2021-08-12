@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -40,6 +41,10 @@ public class VisualSimulator {
 	Button[] Buttons = new Button[ButtonNum];
 	TextField[] TextFields = new TextField[TextFieldNum];
 
+	JPanelsIndex JPIndex;
+	ButtonsIndex BIndex;
+	TextFieldsIndex TFIndex;
+	
 	interface JPanelsIndex {
 		final int TOP = 0;
 		final int MID = 1;
@@ -103,6 +108,8 @@ public class VisualSimulator {
 	 */
 	public void load(File program) {
 		// ...
+		
+		
 		sicLoader.load(program);
 		sicSimulator.load(program);
 	};
@@ -351,10 +358,13 @@ public class VisualSimulator {
 		JPanels[JPanelsIndex.MID_RIGHT_RIGHT].add(new JPanel());
 		
 		Buttons[ButtonsIndex.RUN_ONE_STEP] = new Button("Run (1 step)");
+		Buttons[ButtonsIndex.RUN_ONE_STEP].addActionListener(this.eventHandler);
 		JPanels[JPanelsIndex.MID_RIGHT_RIGHT].add(Buttons[ButtonsIndex.RUN_ONE_STEP]);
 		Buttons[ButtonsIndex.RUN_ALL_STEP] = new Button("Run (ALL step)");
+		Buttons[ButtonsIndex.RUN_ALL_STEP].addActionListener(this.eventHandler);
 		JPanels[JPanelsIndex.MID_RIGHT_RIGHT].add(Buttons[ButtonsIndex.RUN_ALL_STEP]);
 		Buttons[ButtonsIndex.EXIT] = new Button("Exit");
+		Buttons[ButtonsIndex.EXIT].addActionListener(this.eventHandler);
 		JPanels[JPanelsIndex.MID_RIGHT_RIGHT].add(Buttons[ButtonsIndex.EXIT]);
 		
 		JPanels[JPanelsIndex.BOTTOM].setLayout(new BorderLayout());
@@ -366,6 +376,25 @@ public class VisualSimulator {
 
 	}
 
+	public void ExitEvent()
+	{
+		this.MainFrame.setVisible(false);
+		System.exit(0);
+	}
+	
+	public File FileOpenEvent() {
+		JFileChooser fileChooser = new JFileChooser();
+		
+		int choice = fileChooser.showOpenDialog(MainFrame);
+		if(choice == JFileChooser.APPROVE_OPTION)
+		{
+			this.TextFields[TextFieldsIndex.FILENAME].setText(fileChooser.getSelectedFile().getName());
+			return fileChooser.getSelectedFile();
+		}
+		else
+			return null;
+		
+	}
 	public static void main(String[] args) {
 
 		VisualSimulator vs = new VisualSimulator();
@@ -386,6 +415,23 @@ class EventHandler implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		
+		if(e.getSource().equals(vs.Buttons[vs.BIndex.RUN_ONE_STEP])){
+			
+			System.out.println("One step.");
+		}else if(e.getSource().equals(vs.Buttons[vs.BIndex.FILEOPEN])) {
+			System.out.println("File Open");
+			vs.load(vs.FileOpenEvent());
+			
+		}else if(e.getSource().equals(vs.Buttons[vs.BIndex.RUN_ALL_STEP])) {
+			System.out.println("Run All");
+			
+		}else if(e.getSource().equals(vs.Buttons[vs.BIndex.EXIT])) {
+			System.out.println("Exit");
+			vs.ExitEvent();
+			
+		}
+		
 
 	}
 
