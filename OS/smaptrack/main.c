@@ -2,12 +2,11 @@
 #include <fcntl.h> //open
 #include <stdlib.h> //exit, atoi
 #include <unistd.h> //lseek, read, sleep
-#include <string.h> //strcpy
+#include <string.h> //strcpy, strcmp
 
 #define __SMAPTRACK_DIR_BUFFER_SIZE__ 1024
 #define __SMAPTRACK_DATA_COUNT__ 256
 //#define __SMAPTRACK_DEBUG__ 
-
 struct smaptrack_block {
 	char lines[16][512];
 };
@@ -15,12 +14,17 @@ struct smaptrack_block {
 	
 int main(int argc, char *argv[]) {
 
-	if (argc != 4) {
-    
-		printf("Usage : %s [# pid] [# duration(sec)] [# smap line count]\n", argv[0]);
-		exit(0);
-	}
+    int __SMAPTRACK_HEAP_TRACK__ = 0;
 
+	if (argc < 4) {
+    
+		printf("Usage : %s [# pid] [# duration(sec)] [# smap line count] [optional --HEAP]\n", argv[0]);
+		exit(0);
+	}else if(argc >=5 && !strcmp(argv[4],"--HEAP")){
+    
+        __SMAPTRACK_HEAP_TRACK__ = 1;
+    }
+    
     int smap_elem_line_count = atoi(argv[3]);
 	int sleep_duration = atoi(argv[2]);
     
@@ -75,7 +79,7 @@ int main(int argc, char *argv[]) {
 
             buffer[b_i] = '\0';
             strcpy(smapsb[count].lines[j],buffer);
- //           printf("Written at %d:%d\nData:%s\n\n",count,j,smapsb[count].lines[j]);
+ //printf("Written at %d:%d\nData:%s\n\n",count,j,smapsb[count].lines[j]);
 
             b_i=0;
             j++;
@@ -89,12 +93,6 @@ int main(int argc, char *argv[]) {
         }
         buffer[b_i]='\0';
         strcpy(smapsb[count].lines[j],buffer);
-        
-        
-        
-         
-        
-            
         
         //comparison here...
 #ifdef __SMAPTRACK_DEBUG__
@@ -110,6 +108,26 @@ int main(int argc, char *argv[]) {
         printf("-----\n");
 		}
         printf("\n\n----------------------\n\n");
+#elif __SMAPTRACK_HEAP_TRACK__ == 1
+        for(i=0;i<count;i++)
+        {
+            for(j=0;j<smap_elem_line_count;j++)
+            {
+                if(strcmp(smapsb[i].lines[j],smapsbprev[i].lines[j])){
+                    
+                    if(strstr(smapsb[i].lines[0],"heap"))
+                    {
+                        for(j=0;j<smap_elem_line_count;j++){
+    
+                            printf("%s   --->   %s\n",smapsbprev[i].lines[j],smapsb[i].lines[j]);
+                            strcpy(smapsbprev[i].lines[j], smapsb[i].lines[j]);
+                        }
+                    break;
+                    printf("\n\n");
+                    }
+                }
+            }
+        }
 #else
         for(i=0;i<count;i++)
         {
@@ -118,7 +136,7 @@ int main(int argc, char *argv[]) {
                 if(strcmp(smapsb[i].lines[j],smapsbprev[i].lines[j])){
                     
                     for(j=0;j<smap_elem_line_count;j++){
-                        printf("%s   --->   %s\n",smapsb[i].lines[j],smapsbprev[i].lines[j]);
+                        printf("%s   --->   %s\n",smapsbprev[i].lines[j],smapsb[i].lines[j]);
                         strcpy(smapsbprev[i].lines[j], smapsb[i].lines[j]);
                     }
                     break;
