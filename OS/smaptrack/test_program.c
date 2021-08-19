@@ -1,16 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
-int main(void){
+int main(int argc, char *args[]){
     
-int next = 0;
+    
+    printf("use : %s [+ size] [+ duration]\n",args[0]);
+
+    int plus_size = atoi(args[1]);
+    int duration = atoi(args[2]);
 
     while(1){
-    scanf("%d",&next);
-    
-    int *a = malloc(next);
 
-    printf("%d alloced..\n",next);
+    malloc(plus_size);
+
+    sleep(duration);
 
     
     }
