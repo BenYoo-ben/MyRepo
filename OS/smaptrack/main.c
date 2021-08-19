@@ -6,7 +6,7 @@
 #include <time.h> //time measure
 
 #define __SMAPTRACK_DIR_BUFFER_SIZE__ 1024
-#define __SMAPTRACK_BLOCK_LINE_MAXIMUM__ 32
+#define __SMAPTRACK_BLOCK_LINE_MAXIMUM__ 50
 #define __SMAPTRACK_LINE_LENGTH__ 128
 //#define __SMAPTRACK_DEBUG__ 
 struct smaptrack_block {
@@ -54,11 +54,13 @@ int EvaluateSmapElemLineCount(int fd){
 
 int main(int argc, char *argv[]) {
     int smaptrack_data_count = 128;
-    int __SMAPTRACK_HEAP_TRACK__ = 0;
-	
+    int __SMAPTRACK_GREP_TRACK__ = 0;
+
+    int grep_block_count = 0;
+	char grep_block[__SMAPTRACK_BLOCK_LINE_MAXIMUM__][64];
     if (argc < 2) {
     
-		printf("Usage : %s [# pid] [# duration(sec)]  [--heap=y/n] [--data_count=#] \n", argv[0]);
+		printf("Usage : %s [# pid] [# duration(sec)]  [--grep=string] [--data_count=#] \n", argv[0]);
 		exit(0);
     }else if(argc > 3){
         
@@ -70,11 +72,14 @@ int main(int argc, char *argv[]) {
 
             char *c_p = NULL;
             
-            if( (c_p = strstr(argv[iter],"--heap"))!= NULL){
+            if( (c_p = strstr(argv[iter],"--grep"))!= NULL){
             printf("%s...\n",c_p);
                 c_p = strstr(c_p,"=");
-                if(c_p[1] == 'y')
-                    __SMAPTRACK_HEAP_TRACK__ = 1;
+                sprintf(grep_block[grep_block_count],"%s",c_p+1);
+                grep_block[grep_block_count][strlen(grep_block[grep_block_count])]='\0';
+                printf(":%s:\n",grep_block[grep_block_count]);
+                grep_block_count++;
+                __SMAPTRACK_GREP_TRACK__ = 1;
             }
             else if( (c_p = strstr(argv[iter],"--data_count"))!=NULL){
                 c_p = strstr(c_p,"=");
@@ -97,7 +102,7 @@ int main(int argc, char *argv[]) {
 	struct smaptrack_block smapsb[smaptrack_data_count];
     struct smaptrack_block smapsbprev[smaptrack_data_count];
    
-    int i;
+    int i,k;
     for(i=0;i<smaptrack_data_count;i++){
         InitSmaptrackBlock(&(smapsb[i]));
         InitSmaptrackBlock(&(smapsbprev[i]));
@@ -191,8 +196,7 @@ int main(int argc, char *argv[]) {
 		}
         printf("\n\n----------------------\n\n");
 #else
-if(__SMAPTRACK_HEAP_TRACK__ == 1){
-       printf("HEAP_TRACK----\n");
+if(__SMAPTRACK_GREP_TRACK__ == 1){
         
         for(i=0;i<count;i++)
         {
@@ -200,21 +204,30 @@ if(__SMAPTRACK_HEAP_TRACK__ == 1){
             {
                 if(strcmp(smapsb[i].lines[j],smapsbprev[i].lines[j])){
                     
-                    if((strstr(smapsb[i].lines[0],"heap"))!=NULL)
-                    {
-                        for(j=0;j<smap_elem_line_count;j++){
+                     int match = 0;
+                     for(k=0;k<grep_block_count;k++){
+                        
+                        if(strstr(smapsb[i].lines[0],grep_block[k])!= NULL ){
+                            match=1;
+                            break;
+                        }
+                     }
+                    if(match==1){
+                     for(j=0;j<smap_elem_line_count;j++){
                             
-                            if(j==0)
-                                printf("%s\n",smapsb[i].lines[j]);
-                            else{
-                            printf("%-30s%-10s%30s\n",smapsbprev[i].lines[j],"   --->",smapsb[i].lines[j]);
-                            }
-                            strcpy(smapsbprev[i].lines[j], smapsb[i].lines[j]);
-                            
-                       }
-                    printf("\n-------------------------------------------\n");
-                    break;
+                         if(j==0)
+                             printf("%s\n",smapsb[i].lines[j]);
+                         else{
+                         printf("%-30s%-10s%30s\n",smapsbprev[i].lines[j],"   --->",smapsb[i].lines[j]);
+                         }
+                         strcpy(smapsbprev[i].lines[j], smapsb[i].lines[j]);
+                         
                     }
+                    
+                    printf("\n--------------------------------------------------\n");
+                    }
+                    break;
+
                 }
             }
         }
