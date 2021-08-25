@@ -1,0 +1,947 @@
+
+[1] -- Wed Aug 25 15:51:37 2021
+563ae4a10000-563ae4a11000 r-xp 00000000 103:02 14950808                  /home/benyoo/myrepo/OS/smaptrack/test
+                                 --->      Size:                  4 kB
+                                 --->      KernelPageSize:        4 kB
+                                 --->      MMUPageSize:           4 kB
+                                 --->      Rss:                   4 kB
+                                 --->      Pss:                   4 kB
+                                 --->      Shared_Clean:          0 kB
+                                 --->      Shared_Dirty:          0 kB
+                                 --->      Private_Clean:         4 kB
+                                 --->      Private_Dirty:         0 kB
+                                 --->      Referenced:            4 kB
+                                 --->      Anonymous:             0 kB
+                                 --->      LazyFree:              0 kB
+                                 --->      AnonHugePages:         0 kB
+                                 --->      ShmemPmdMapped:        0 kB
+                                 --->       FilePmdMapped:        0 kB
+                                 --->      Shared_Hugetlb:        0 kB
+                                 --->      Private_Hugetlb:       0 kB
+                                 --->      Swap:                  0 kB
+                                 --->      SwapPss:               0 kB
+                                 --->      Locked:                0 kB
+                                 --->                  THPeligible:		0
+                                 --->   VmFlags: rd ex mr mw me dw sd 
+
+----------------------------------------------------------
+563ae4c10000-563ae4c11000 r--p 00000000 103:02 14950808                  /home/benyoo/myrepo/OS/smaptrack/test
+                                 --->      Size:                  4 kB
+                                 --->      KernelPageSize:        4 kB
+                                 --->      MMUPageSize:           4 kB
+                                 --->      Rss:                   4 kB
+                                 --->      Pss:                   4 kB
+                                 --->      Shared_Clean:          0 kB
+                                 --->      Shared_Dirty:          0 kB
+                                 --->      Private_Clean:         0 kB
+                                 --->      Private_Dirty:         4 kB
+                                 --->      Referenced:            4 kB
+                                 --->      Anonymous:             4 kB
+                                 --->      LazyFree:              0 kB
+                                 --->      AnonHugePages:         0 kB
+                                 --->      ShmemPmdMapped:        0 kB
+                                 --->       FilePmdMapped:        0 kB
+                                 --->      Shared_Hugetlb:        0 kB
+                                 --->      Private_Hugetlb:       0 kB
+                                 --->      Swap:                  0 kB
+                                 --->      SwapPss:               0 kB
+                                 --->      Locked:                0 kB
+                                 --->                  THPeligible:		0
+                                 --->   VmFlags: rd mr mw me dw ac sd 
+
+----------------------------------------------------------
+563ae4c11000-563ae4c12000 rw-p 00001000 103:02 14950808                  /home/benyoo/myrepo/OS/smaptrack/test
+                                 --->      Size:                  4 kB
+                                 --->      KernelPageSize:        4 kB
+                                 --->      MMUPageSize:           4 kB
+                                 --->      Rss:                   4 kB
+                                 --->      Pss:                   4 kB
+                                 --->      Shared_Clean:          0 kB
+                                 --->      Shared_Dirty:          0 kB
+                                 --->      Private_Clean:         0 kB
+                                 --->      Private_Dirty:         4 kB
+                                 --->      Referenced:            4 kB
+                                 --->      Anonymous:             4 kB
+                                 --->      LazyFree:              0 kB
+                                 --->      AnonHugePages:         0 kB
+                                 --->      ShmemPmdMapped:        0 kB
+                                 --->       FilePmdMapped:        0 kB
+                                 --->      Shared_Hugetlb:        0 kB
+                                 --->      Private_Hugetlb:       0 kB
+                                 --->      Swap:                  0 kB
+                                 --->      SwapPss:               0 kB
+                                 --->      Locked:                0 kB
+                                 --->                  THPeligible:		0
+                                 --->   VmFlags: rd wr mr mw me dw ac sd 
+
+----------------------------------------------------------
+563ae5b0d000-563ae5b2e000 rw-p 00000000 00:00 0                          [heap]
+                                 --->      Size:                132 kB
+                                 --->      KernelPageSize:        4 kB
+                                 --->      MMUPageSize:           4 kB
+                                 --->      Rss:                  16 kB
+                                 --->      Pss:                  16 kB
+                                 --->      Shared_Clean:          0 kB
+                                 --->      Shared_Dirty:          0 kB
+                                 --->      Private_Clean:         0 kB
+                                 --->      Private_Dirty:        16 kB
+                                 --->      Referenced:           16 kB
+                                 --->      Anonymous:            16 kB
+                                 --->      LazyFree:              0 kB
+                                 --->      AnonHugePages:         0 kB
+                                 --->      ShmemPmdMapped:        0 kB
+                                 --->       FilePmdMapped:        0 kB
+                                 --->      Shared_Hugetlb:        0 kB
+                                 --->      Private_Hugetlb:       0 kB
+                                 --->      Swap:                  0 kB
+                                 --->      SwapPss:               0 kB
+                                 --->      Locked:                0 kB
+                                 --->                  THPeligible:		0
+                                 --->   VmFlags: rd wr mr mw me ac sd 
+
+----------------------------------------------------------
+7f4bc2eb1000-7f4bc3098000 r-xp 00000000 103:02 5636180                   /lib/x86_64-linux-gnu/libc-2.27.so
+                                 --->      Size:               1948 kB
+                                 --->      KernelPageSize:        4 kB
+                                 --->      MMUPageSize:           4 kB
+                                 --->      Rss:                1324 kB
+                                 --->      Pss:                   9 kB
+                                 --->      Shared_Clean:       1324 kB
+                                 --->      Shared_Dirty:          0 kB
+                                 --->      Private_Clean:         0 kB
+                                 --->      Private_Dirty:         0 kB
+                                 --->      Referenced:         1324 kB
+                                 --->      Anonymous:             0 kB
+                                 --->      LazyFree:              0 kB
+                                 --->      AnonHugePages:         0 kB
+                                 --->      ShmemPmdMapped:        0 kB
+                                 --->       FilePmdMapped:        0 kB
+                                 --->      Shared_Hugetlb:        0 kB
+                                 --->      Private_Hugetlb:       0 kB
+                                 --->      Swap:                  0 kB
+                                 --->      SwapPss:               0 kB
+                                 --->      Locked:                0 kB
+                                 --->                  THPeligible:		0
+                                 --->      VmFlags: rd ex mr mw me sd 
+
+----------------------------------------------------------
+7f4bc3098000-7f4bc3298000 ---p 001e7000 103:02 5636180                   /lib/x86_64-linux-gnu/libc-2.27.so
+                                 --->      Size:               2048 kB
+                                 --->      KernelPageSize:        4 kB
+                                 --->      MMUPageSize:           4 kB
+                                 --->      Rss:                   0 kB
+                                 --->      Pss:                   0 kB
+                                 --->      Shared_Clean:          0 kB
+                                 --->      Shared_Dirty:          0 kB
+                                 --->      Private_Clean:         0 kB
+                                 --->      Private_Dirty:         0 kB
+                                 --->      Referenced:            0 kB
+                                 --->      Anonymous:             0 kB
+                                 --->      LazyFree:              0 kB
+                                 --->      AnonHugePages:         0 kB
+                                 --->      ShmemPmdMapped:        0 kB
+                                 --->       FilePmdMapped:        0 kB
+                                 --->      Shared_Hugetlb:        0 kB
+                                 --->      Private_Hugetlb:       0 kB
+                                 --->      Swap:                  0 kB
+                                 --->      SwapPss:               0 kB
+                                 --->      Locked:                0 kB
+                                 --->                  THPeligible:		0
+                                 --->            VmFlags: mr mw me sd 
+
+----------------------------------------------------------
+7f4bc3298000-7f4bc329c000 r--p 001e7000 103:02 5636180                   /lib/x86_64-linux-gnu/libc-2.27.so
+                                 --->      Size:                 16 kB
+                                 --->      KernelPageSize:        4 kB
+                                 --->      MMUPageSize:           4 kB
+                                 --->      Rss:                  16 kB
+                                 --->      Pss:                  16 kB
+                                 --->      Shared_Clean:          0 kB
+                                 --->      Shared_Dirty:          0 kB
+                                 --->      Private_Clean:         0 kB
+                                 --->      Private_Dirty:        16 kB
+                                 --->      Referenced:           16 kB
+                                 --->      Anonymous:            16 kB
+                                 --->      LazyFree:              0 kB
+                                 --->      AnonHugePages:         0 kB
+                                 --->      ShmemPmdMapped:        0 kB
+                                 --->       FilePmdMapped:        0 kB
+                                 --->      Shared_Hugetlb:        0 kB
+                                 --->      Private_Hugetlb:       0 kB
+                                 --->      Swap:                  0 kB
+                                 --->      SwapPss:               0 kB
+                                 --->      Locked:                0 kB
+                                 --->                  THPeligible:		0
+                                 --->      VmFlags: rd mr mw me ac sd 
+
+----------------------------------------------------------
+7f4bc329c000-7f4bc329e000 rw-p 001eb000 103:02 5636180                   /lib/x86_64-linux-gnu/libc-2.27.so
+                                 --->      Size:                  8 kB
+                                 --->      KernelPageSize:        4 kB
+                                 --->      MMUPageSize:           4 kB
+                                 --->      Rss:                   8 kB
+                                 --->      Pss:                   8 kB
+                                 --->      Shared_Clean:          0 kB
+                                 --->      Shared_Dirty:          0 kB
+                                 --->      Private_Clean:         0 kB
+                                 --->      Private_Dirty:         8 kB
+                                 --->      Referenced:            8 kB
+                                 --->      Anonymous:             8 kB
+                                 --->      LazyFree:              0 kB
+                                 --->      AnonHugePages:         0 kB
+                                 --->      ShmemPmdMapped:        0 kB
+                                 --->       FilePmdMapped:        0 kB
+                                 --->      Shared_Hugetlb:        0 kB
+                                 --->      Private_Hugetlb:       0 kB
+                                 --->      Swap:                  0 kB
+                                 --->      SwapPss:               0 kB
+                                 --->      Locked:                0 kB
+                                 --->                  THPeligible:		0
+                                 --->   VmFlags: rd wr mr mw me ac sd 
+
+----------------------------------------------------------
+7f4bc329e000-7f4bc32a2000 rw-p 00000000 00:00 0 
+                                 --->      Size:                 16 kB
+                                 --->      KernelPageSize:        4 kB
+                                 --->      MMUPageSize:           4 kB
+                                 --->      Rss:                  12 kB
+                                 --->      Pss:                  12 kB
+                                 --->      Shared_Clean:          0 kB
+                                 --->      Shared_Dirty:          0 kB
+                                 --->      Private_Clean:         0 kB
+                                 --->      Private_Dirty:        12 kB
+                                 --->      Referenced:           12 kB
+                                 --->      Anonymous:            12 kB
+                                 --->      LazyFree:              0 kB
+                                 --->      AnonHugePages:         0 kB
+                                 --->      ShmemPmdMapped:        0 kB
+                                 --->       FilePmdMapped:        0 kB
+                                 --->      Shared_Hugetlb:        0 kB
+                                 --->      Private_Hugetlb:       0 kB
+                                 --->      Swap:                  0 kB
+                                 --->      SwapPss:               0 kB
+                                 --->      Locked:                0 kB
+                                 --->                  THPeligible:		0
+                                 --->   VmFlags: rd wr mr mw me ac sd 
+
+----------------------------------------------------------
+7f4bc32a2000-7f4bc32cb000 r-xp 00000000 103:02 5636119                   /lib/x86_64-linux-gnu/ld-2.27.so
+                                 --->      Size:                164 kB
+                                 --->      KernelPageSize:        4 kB
+                                 --->      MMUPageSize:           4 kB
+                                 --->      Rss:                 164 kB
+                                 --->      Pss:                   1 kB
+                                 --->      Shared_Clean:        164 kB
+                                 --->      Shared_Dirty:          0 kB
+                                 --->      Private_Clean:         0 kB
+                                 --->      Private_Dirty:         0 kB
+                                 --->      Referenced:          164 kB
+                                 --->      Anonymous:             0 kB
+                                 --->      LazyFree:              0 kB
+                                 --->      AnonHugePages:         0 kB
+                                 --->      ShmemPmdMapped:        0 kB
+                                 --->       FilePmdMapped:        0 kB
+                                 --->      Shared_Hugetlb:        0 kB
+                                 --->      Private_Hugetlb:       0 kB
+                                 --->      Swap:                  0 kB
+                                 --->      SwapPss:               0 kB
+                                 --->      Locked:                0 kB
+                                 --->                  THPeligible:		0
+                                 --->   VmFlags: rd ex mr mw me dw sd 
+
+----------------------------------------------------------
+7f4bc34b3000-7f4bc34b5000 rw-p 00000000 00:00 0 
+                                 --->      Size:                  8 kB
+                                 --->      KernelPageSize:        4 kB
+                                 --->      MMUPageSize:           4 kB
+                                 --->      Rss:                   8 kB
+                                 --->      Pss:                   8 kB
+                                 --->      Shared_Clean:          0 kB
+                                 --->      Shared_Dirty:          0 kB
+                                 --->      Private_Clean:         0 kB
+                                 --->      Private_Dirty:         8 kB
+                                 --->      Referenced:            8 kB
+                                 --->      Anonymous:             8 kB
+                                 --->      LazyFree:              0 kB
+                                 --->      AnonHugePages:         0 kB
+                                 --->      ShmemPmdMapped:        0 kB
+                                 --->       FilePmdMapped:        0 kB
+                                 --->      Shared_Hugetlb:        0 kB
+                                 --->      Private_Hugetlb:       0 kB
+                                 --->      Swap:                  0 kB
+                                 --->      SwapPss:               0 kB
+                                 --->      Locked:                0 kB
+                                 --->                  THPeligible:		0
+                                 --->   VmFlags: rd wr mr mw me ac sd 
+
+----------------------------------------------------------
+7f4bc34cb000-7f4bc34cc000 r--p 00029000 103:02 5636119                   /lib/x86_64-linux-gnu/ld-2.27.so
+                                 --->      Size:                  4 kB
+                                 --->      KernelPageSize:        4 kB
+                                 --->      MMUPageSize:           4 kB
+                                 --->      Rss:                   4 kB
+                                 --->      Pss:                   4 kB
+                                 --->      Shared_Clean:          0 kB
+                                 --->      Shared_Dirty:          0 kB
+                                 --->      Private_Clean:         0 kB
+                                 --->      Private_Dirty:         4 kB
+                                 --->      Referenced:            4 kB
+                                 --->      Anonymous:             4 kB
+                                 --->      LazyFree:              0 kB
+                                 --->      AnonHugePages:         0 kB
+                                 --->      ShmemPmdMapped:        0 kB
+                                 --->       FilePmdMapped:        0 kB
+                                 --->      Shared_Hugetlb:        0 kB
+                                 --->      Private_Hugetlb:       0 kB
+                                 --->      Swap:                  0 kB
+                                 --->      SwapPss:               0 kB
+                                 --->      Locked:                0 kB
+                                 --->                  THPeligible:		0
+                                 --->   VmFlags: rd mr mw me dw ac sd 
+
+----------------------------------------------------------
+7f4bc34cc000-7f4bc34cd000 rw-p 0002a000 103:02 5636119                   /lib/x86_64-linux-gnu/ld-2.27.so
+                                 --->      Size:                  4 kB
+                                 --->      KernelPageSize:        4 kB
+                                 --->      MMUPageSize:           4 kB
+                                 --->      Rss:                   4 kB
+                                 --->      Pss:                   4 kB
+                                 --->      Shared_Clean:          0 kB
+                                 --->      Shared_Dirty:          0 kB
+                                 --->      Private_Clean:         0 kB
+                                 --->      Private_Dirty:         4 kB
+                                 --->      Referenced:            4 kB
+                                 --->      Anonymous:             4 kB
+                                 --->      LazyFree:              0 kB
+                                 --->      AnonHugePages:         0 kB
+                                 --->      ShmemPmdMapped:        0 kB
+                                 --->       FilePmdMapped:        0 kB
+                                 --->      Shared_Hugetlb:        0 kB
+                                 --->      Private_Hugetlb:       0 kB
+                                 --->      Swap:                  0 kB
+                                 --->      SwapPss:               0 kB
+                                 --->      Locked:                0 kB
+                                 --->                  THPeligible:		0
+                                 --->   VmFlags: rd wr mr mw me dw ac sd 
+
+----------------------------------------------------------
+7f4bc34cd000-7f4bc34ce000 rw-p 00000000 00:00 0 
+                                 --->      Size:                  4 kB
+                                 --->      KernelPageSize:        4 kB
+                                 --->      MMUPageSize:           4 kB
+                                 --->      Rss:                   4 kB
+                                 --->      Pss:                   4 kB
+                                 --->      Shared_Clean:          0 kB
+                                 --->      Shared_Dirty:          0 kB
+                                 --->      Private_Clean:         0 kB
+                                 --->      Private_Dirty:         4 kB
+                                 --->      Referenced:            4 kB
+                                 --->      Anonymous:             4 kB
+                                 --->      LazyFree:              0 kB
+                                 --->      AnonHugePages:         0 kB
+                                 --->      ShmemPmdMapped:        0 kB
+                                 --->       FilePmdMapped:        0 kB
+                                 --->      Shared_Hugetlb:        0 kB
+                                 --->      Private_Hugetlb:       0 kB
+                                 --->      Swap:                  0 kB
+                                 --->      SwapPss:               0 kB
+                                 --->      Locked:                0 kB
+                                 --->                  THPeligible:		0
+                                 --->   VmFlags: rd wr mr mw me ac sd 
+
+----------------------------------------------------------
+7ffe24796000-7ffe247b7000 rw-p 00000000 00:00 0                          [stack]
+                                 --->      Size:                132 kB
+                                 --->      KernelPageSize:        4 kB
+                                 --->      MMUPageSize:           4 kB
+                                 --->      Rss:                  16 kB
+                                 --->      Pss:                  16 kB
+                                 --->      Shared_Clean:          0 kB
+                                 --->      Shared_Dirty:          0 kB
+                                 --->      Private_Clean:         0 kB
+                                 --->      Private_Dirty:        16 kB
+                                 --->      Referenced:           16 kB
+                                 --->      Anonymous:            16 kB
+                                 --->      LazyFree:              0 kB
+                                 --->      AnonHugePages:         0 kB
+                                 --->      ShmemPmdMapped:        0 kB
+                                 --->       FilePmdMapped:        0 kB
+                                 --->      Shared_Hugetlb:        0 kB
+                                 --->      Private_Hugetlb:       0 kB
+                                 --->      Swap:                  0 kB
+                                 --->      SwapPss:               0 kB
+                                 --->      Locked:                0 kB
+                                 --->                  THPeligible:		0
+                                 --->   VmFlags: rd wr mr mw me gd ac 
+
+----------------------------------------------------------
+7ffe247ed000-7ffe247f0000 r--p 00000000 00:00 0                          [vvar]
+                                 --->      Size:                 12 kB
+                                 --->      KernelPageSize:        4 kB
+                                 --->      MMUPageSize:           4 kB
+                                 --->      Rss:                   0 kB
+                                 --->      Pss:                   0 kB
+                                 --->      Shared_Clean:          0 kB
+                                 --->      Shared_Dirty:          0 kB
+                                 --->      Private_Clean:         0 kB
+                                 --->      Private_Dirty:         0 kB
+                                 --->      Referenced:            0 kB
+                                 --->      Anonymous:             0 kB
+                                 --->      LazyFree:              0 kB
+                                 --->      AnonHugePages:         0 kB
+                                 --->      ShmemPmdMapped:        0 kB
+                                 --->       FilePmdMapped:        0 kB
+                                 --->      Shared_Hugetlb:        0 kB
+                                 --->      Private_Hugetlb:       0 kB
+                                 --->      Swap:                  0 kB
+                                 --->      SwapPss:               0 kB
+                                 --->      Locked:                0 kB
+                                 --->                  THPeligible:		0
+                                 --->   VmFlags: rd mr pf io de dd sd 
+
+----------------------------------------------------------
+7ffe247f0000-7ffe247f1000 r-xp 00000000 00:00 0                          [vdso]
+                                 --->      Size:                  4 kB
+                                 --->      KernelPageSize:        4 kB
+                                 --->      MMUPageSize:           4 kB
+                                 --->      Rss:                   4 kB
+                                 --->      Pss:                   0 kB
+                                 --->      Shared_Clean:          4 kB
+                                 --->      Shared_Dirty:          0 kB
+                                 --->      Private_Clean:         0 kB
+                                 --->      Private_Dirty:         0 kB
+                                 --->      Referenced:            4 kB
+                                 --->      Anonymous:             0 kB
+                                 --->      LazyFree:              0 kB
+                                 --->      AnonHugePages:         0 kB
+                                 --->      ShmemPmdMapped:        0 kB
+                                 --->       FilePmdMapped:        0 kB
+                                 --->      Shared_Hugetlb:        0 kB
+                                 --->      Private_Hugetlb:       0 kB
+                                 --->      Swap:                  0 kB
+                                 --->      SwapPss:               0 kB
+                                 --->      Locked:                0 kB
+                                 --->                  THPeligible:		0
+                                 --->   VmFlags: rd ex mr mw me de sd 
+
+----------------------------------------------------------
+
+[2] -- Wed Aug 25 15:51:38 2021
+563ae5b0d000-563ae5b2e000 rw-p 00000000 00:00 0                          [heap]
+Size:                132 kB      --->      Size:                132 kB
+KernelPageSize:        4 kB      --->      KernelPageSize:        4 kB
+MMUPageSize:           4 kB      --->      MMUPageSize:           4 kB
+Rss:                  16 kB      --->      Rss:                  20 kB
+Pss:                  16 kB      --->      Pss:                  20 kB
+Shared_Clean:          0 kB      --->      Shared_Clean:          0 kB
+Shared_Dirty:          0 kB      --->      Shared_Dirty:          0 kB
+Private_Clean:         0 kB      --->      Private_Clean:         0 kB
+Private_Dirty:        16 kB      --->      Private_Dirty:        20 kB
+Referenced:           16 kB      --->      Referenced:           20 kB
+Anonymous:            16 kB      --->      Anonymous:            20 kB
+LazyFree:              0 kB      --->      LazyFree:              0 kB
+AnonHugePages:         0 kB      --->      AnonHugePages:         0 kB
+ShmemPmdMapped:        0 kB      --->      ShmemPmdMapped:        0 kB
+FilePmdMapped:        0 kB       --->       FilePmdMapped:        0 kB
+Shared_Hugetlb:        0 kB      --->      Shared_Hugetlb:        0 kB
+Private_Hugetlb:       0 kB      --->      Private_Hugetlb:       0 kB
+Swap:                  0 kB      --->      Swap:                  0 kB
+SwapPss:               0 kB      --->      SwapPss:               0 kB
+Locked:                0 kB      --->      Locked:                0 kB
+THPeligible:		0                  --->                  THPeligible:		0
+VmFlags: rd wr mr mw me ac sd    --->   VmFlags: rd wr mr mw me ac sd 
+
+----------------------------------------------------------
+
+[3] -- Wed Aug 25 15:51:39 2021
+
+[4] -- Wed Aug 25 15:51:40 2021
+563ae5b0d000-563ae5b2e000 rw-p 00000000 00:00 0                          [heap]
+Size:                132 kB      --->      Size:                132 kB
+KernelPageSize:        4 kB      --->      KernelPageSize:        4 kB
+MMUPageSize:           4 kB      --->      MMUPageSize:           4 kB
+Rss:                  20 kB      --->      Rss:                  24 kB
+Pss:                  20 kB      --->      Pss:                  24 kB
+Shared_Clean:          0 kB      --->      Shared_Clean:          0 kB
+Shared_Dirty:          0 kB      --->      Shared_Dirty:          0 kB
+Private_Clean:         0 kB      --->      Private_Clean:         0 kB
+Private_Dirty:        20 kB      --->      Private_Dirty:        24 kB
+Referenced:           20 kB      --->      Referenced:           24 kB
+Anonymous:            20 kB      --->      Anonymous:            24 kB
+LazyFree:              0 kB      --->      LazyFree:              0 kB
+AnonHugePages:         0 kB      --->      AnonHugePages:         0 kB
+ShmemPmdMapped:        0 kB      --->      ShmemPmdMapped:        0 kB
+FilePmdMapped:        0 kB       --->       FilePmdMapped:        0 kB
+Shared_Hugetlb:        0 kB      --->      Shared_Hugetlb:        0 kB
+Private_Hugetlb:       0 kB      --->      Private_Hugetlb:       0 kB
+Swap:                  0 kB      --->      Swap:                  0 kB
+SwapPss:               0 kB      --->      SwapPss:               0 kB
+Locked:                0 kB      --->      Locked:                0 kB
+THPeligible:		0                  --->                  THPeligible:		0
+VmFlags: rd wr mr mw me ac sd    --->   VmFlags: rd wr mr mw me ac sd 
+
+----------------------------------------------------------
+
+[5] -- Wed Aug 25 15:51:41 2021
+
+[6] -- Wed Aug 25 15:51:42 2021
+563ae5b0d000-563ae5b2e000 rw-p 00000000 00:00 0                          [heap]
+Size:                132 kB      --->      Size:                132 kB
+KernelPageSize:        4 kB      --->      KernelPageSize:        4 kB
+MMUPageSize:           4 kB      --->      MMUPageSize:           4 kB
+Rss:                  24 kB      --->      Rss:                  28 kB
+Pss:                  24 kB      --->      Pss:                  28 kB
+Shared_Clean:          0 kB      --->      Shared_Clean:          0 kB
+Shared_Dirty:          0 kB      --->      Shared_Dirty:          0 kB
+Private_Clean:         0 kB      --->      Private_Clean:         0 kB
+Private_Dirty:        24 kB      --->      Private_Dirty:        28 kB
+Referenced:           24 kB      --->      Referenced:           28 kB
+Anonymous:            24 kB      --->      Anonymous:            28 kB
+LazyFree:              0 kB      --->      LazyFree:              0 kB
+AnonHugePages:         0 kB      --->      AnonHugePages:         0 kB
+ShmemPmdMapped:        0 kB      --->      ShmemPmdMapped:        0 kB
+FilePmdMapped:        0 kB       --->       FilePmdMapped:        0 kB
+Shared_Hugetlb:        0 kB      --->      Shared_Hugetlb:        0 kB
+Private_Hugetlb:       0 kB      --->      Private_Hugetlb:       0 kB
+Swap:                  0 kB      --->      Swap:                  0 kB
+SwapPss:               0 kB      --->      SwapPss:               0 kB
+Locked:                0 kB      --->      Locked:                0 kB
+THPeligible:		0                  --->                  THPeligible:		0
+VmFlags: rd wr mr mw me ac sd    --->   VmFlags: rd wr mr mw me ac sd 
+
+----------------------------------------------------------
+
+[7] -- Wed Aug 25 15:51:43 2021
+
+[8] -- Wed Aug 25 15:51:44 2021
+563ae5b0d000-563ae5b2e000 rw-p 00000000 00:00 0                          [heap]
+Size:                132 kB      --->      Size:                132 kB
+KernelPageSize:        4 kB      --->      KernelPageSize:        4 kB
+MMUPageSize:           4 kB      --->      MMUPageSize:           4 kB
+Rss:                  28 kB      --->      Rss:                  32 kB
+Pss:                  28 kB      --->      Pss:                  32 kB
+Shared_Clean:          0 kB      --->      Shared_Clean:          0 kB
+Shared_Dirty:          0 kB      --->      Shared_Dirty:          0 kB
+Private_Clean:         0 kB      --->      Private_Clean:         0 kB
+Private_Dirty:        28 kB      --->      Private_Dirty:        32 kB
+Referenced:           28 kB      --->      Referenced:           32 kB
+Anonymous:            28 kB      --->      Anonymous:            32 kB
+LazyFree:              0 kB      --->      LazyFree:              0 kB
+AnonHugePages:         0 kB      --->      AnonHugePages:         0 kB
+ShmemPmdMapped:        0 kB      --->      ShmemPmdMapped:        0 kB
+FilePmdMapped:        0 kB       --->       FilePmdMapped:        0 kB
+Shared_Hugetlb:        0 kB      --->      Shared_Hugetlb:        0 kB
+Private_Hugetlb:       0 kB      --->      Private_Hugetlb:       0 kB
+Swap:                  0 kB      --->      Swap:                  0 kB
+SwapPss:               0 kB      --->      SwapPss:               0 kB
+Locked:                0 kB      --->      Locked:                0 kB
+THPeligible:		0                  --->                  THPeligible:		0
+VmFlags: rd wr mr mw me ac sd    --->   VmFlags: rd wr mr mw me ac sd 
+
+----------------------------------------------------------
+
+[9] -- Wed Aug 25 15:51:45 2021
+
+[10] -- Wed Aug 25 15:51:46 2021
+563ae5b0d000-563ae5b2e000 rw-p 00000000 00:00 0                          [heap]
+Size:                132 kB      --->      Size:                132 kB
+KernelPageSize:        4 kB      --->      KernelPageSize:        4 kB
+MMUPageSize:           4 kB      --->      MMUPageSize:           4 kB
+Rss:                  32 kB      --->      Rss:                  36 kB
+Pss:                  32 kB      --->      Pss:                  36 kB
+Shared_Clean:          0 kB      --->      Shared_Clean:          0 kB
+Shared_Dirty:          0 kB      --->      Shared_Dirty:          0 kB
+Private_Clean:         0 kB      --->      Private_Clean:         0 kB
+Private_Dirty:        32 kB      --->      Private_Dirty:        36 kB
+Referenced:           32 kB      --->      Referenced:           36 kB
+Anonymous:            32 kB      --->      Anonymous:            36 kB
+LazyFree:              0 kB      --->      LazyFree:              0 kB
+AnonHugePages:         0 kB      --->      AnonHugePages:         0 kB
+ShmemPmdMapped:        0 kB      --->      ShmemPmdMapped:        0 kB
+FilePmdMapped:        0 kB       --->       FilePmdMapped:        0 kB
+Shared_Hugetlb:        0 kB      --->      Shared_Hugetlb:        0 kB
+Private_Hugetlb:       0 kB      --->      Private_Hugetlb:       0 kB
+Swap:                  0 kB      --->      Swap:                  0 kB
+SwapPss:               0 kB      --->      SwapPss:               0 kB
+Locked:                0 kB      --->      Locked:                0 kB
+THPeligible:		0                  --->                  THPeligible:		0
+VmFlags: rd wr mr mw me ac sd    --->   VmFlags: rd wr mr mw me ac sd 
+
+----------------------------------------------------------
+
+[11] -- Wed Aug 25 15:51:47 2021
+
+[12] -- Wed Aug 25 15:51:48 2021
+563ae5b0d000-563ae5b2e000 rw-p 00000000 00:00 0                          [heap]
+Size:                132 kB      --->      Size:                132 kB
+KernelPageSize:        4 kB      --->      KernelPageSize:        4 kB
+MMUPageSize:           4 kB      --->      MMUPageSize:           4 kB
+Rss:                  36 kB      --->      Rss:                  40 kB
+Pss:                  36 kB      --->      Pss:                  40 kB
+Shared_Clean:          0 kB      --->      Shared_Clean:          0 kB
+Shared_Dirty:          0 kB      --->      Shared_Dirty:          0 kB
+Private_Clean:         0 kB      --->      Private_Clean:         0 kB
+Private_Dirty:        36 kB      --->      Private_Dirty:        40 kB
+Referenced:           36 kB      --->      Referenced:           40 kB
+Anonymous:            36 kB      --->      Anonymous:            40 kB
+LazyFree:              0 kB      --->      LazyFree:              0 kB
+AnonHugePages:         0 kB      --->      AnonHugePages:         0 kB
+ShmemPmdMapped:        0 kB      --->      ShmemPmdMapped:        0 kB
+FilePmdMapped:        0 kB       --->       FilePmdMapped:        0 kB
+Shared_Hugetlb:        0 kB      --->      Shared_Hugetlb:        0 kB
+Private_Hugetlb:       0 kB      --->      Private_Hugetlb:       0 kB
+Swap:                  0 kB      --->      Swap:                  0 kB
+SwapPss:               0 kB      --->      SwapPss:               0 kB
+Locked:                0 kB      --->      Locked:                0 kB
+THPeligible:		0                  --->                  THPeligible:		0
+VmFlags: rd wr mr mw me ac sd    --->   VmFlags: rd wr mr mw me ac sd 
+
+----------------------------------------------------------
+
+[13] -- Wed Aug 25 15:51:49 2021
+
+[14] -- Wed Aug 25 15:51:50 2021
+563ae5b0d000-563ae5b2e000 rw-p 00000000 00:00 0                          [heap]
+Size:                132 kB      --->      Size:                132 kB
+KernelPageSize:        4 kB      --->      KernelPageSize:        4 kB
+MMUPageSize:           4 kB      --->      MMUPageSize:           4 kB
+Rss:                  40 kB      --->      Rss:                  44 kB
+Pss:                  40 kB      --->      Pss:                  44 kB
+Shared_Clean:          0 kB      --->      Shared_Clean:          0 kB
+Shared_Dirty:          0 kB      --->      Shared_Dirty:          0 kB
+Private_Clean:         0 kB      --->      Private_Clean:         0 kB
+Private_Dirty:        40 kB      --->      Private_Dirty:        44 kB
+Referenced:           40 kB      --->      Referenced:           44 kB
+Anonymous:            40 kB      --->      Anonymous:            44 kB
+LazyFree:              0 kB      --->      LazyFree:              0 kB
+AnonHugePages:         0 kB      --->      AnonHugePages:         0 kB
+ShmemPmdMapped:        0 kB      --->      ShmemPmdMapped:        0 kB
+FilePmdMapped:        0 kB       --->       FilePmdMapped:        0 kB
+Shared_Hugetlb:        0 kB      --->      Shared_Hugetlb:        0 kB
+Private_Hugetlb:       0 kB      --->      Private_Hugetlb:       0 kB
+Swap:                  0 kB      --->      Swap:                  0 kB
+SwapPss:               0 kB      --->      SwapPss:               0 kB
+Locked:                0 kB      --->      Locked:                0 kB
+THPeligible:		0                  --->                  THPeligible:		0
+VmFlags: rd wr mr mw me ac sd    --->   VmFlags: rd wr mr mw me ac sd 
+
+----------------------------------------------------------
+
+[15] -- Wed Aug 25 15:51:51 2021
+
+[16] -- Wed Aug 25 15:51:52 2021
+563ae5b0d000-563ae5b2e000 rw-p 00000000 00:00 0                          [heap]
+Size:                132 kB      --->      Size:                132 kB
+KernelPageSize:        4 kB      --->      KernelPageSize:        4 kB
+MMUPageSize:           4 kB      --->      MMUPageSize:           4 kB
+Rss:                  44 kB      --->      Rss:                  48 kB
+Pss:                  44 kB      --->      Pss:                  48 kB
+Shared_Clean:          0 kB      --->      Shared_Clean:          0 kB
+Shared_Dirty:          0 kB      --->      Shared_Dirty:          0 kB
+Private_Clean:         0 kB      --->      Private_Clean:         0 kB
+Private_Dirty:        44 kB      --->      Private_Dirty:        48 kB
+Referenced:           44 kB      --->      Referenced:           48 kB
+Anonymous:            44 kB      --->      Anonymous:            48 kB
+LazyFree:              0 kB      --->      LazyFree:              0 kB
+AnonHugePages:         0 kB      --->      AnonHugePages:         0 kB
+ShmemPmdMapped:        0 kB      --->      ShmemPmdMapped:        0 kB
+FilePmdMapped:        0 kB       --->       FilePmdMapped:        0 kB
+Shared_Hugetlb:        0 kB      --->      Shared_Hugetlb:        0 kB
+Private_Hugetlb:       0 kB      --->      Private_Hugetlb:       0 kB
+Swap:                  0 kB      --->      Swap:                  0 kB
+SwapPss:               0 kB      --->      SwapPss:               0 kB
+Locked:                0 kB      --->      Locked:                0 kB
+THPeligible:		0                  --->                  THPeligible:		0
+VmFlags: rd wr mr mw me ac sd    --->   VmFlags: rd wr mr mw me ac sd 
+
+----------------------------------------------------------
+
+[17] -- Wed Aug 25 15:51:53 2021
+
+[18] -- Wed Aug 25 15:51:54 2021
+563ae5b0d000-563ae5b2e000 rw-p 00000000 00:00 0                          [heap]
+Size:                132 kB      --->      Size:                132 kB
+KernelPageSize:        4 kB      --->      KernelPageSize:        4 kB
+MMUPageSize:           4 kB      --->      MMUPageSize:           4 kB
+Rss:                  48 kB      --->      Rss:                  52 kB
+Pss:                  48 kB      --->      Pss:                  52 kB
+Shared_Clean:          0 kB      --->      Shared_Clean:          0 kB
+Shared_Dirty:          0 kB      --->      Shared_Dirty:          0 kB
+Private_Clean:         0 kB      --->      Private_Clean:         0 kB
+Private_Dirty:        48 kB      --->      Private_Dirty:        52 kB
+Referenced:           48 kB      --->      Referenced:           52 kB
+Anonymous:            48 kB      --->      Anonymous:            52 kB
+LazyFree:              0 kB      --->      LazyFree:              0 kB
+AnonHugePages:         0 kB      --->      AnonHugePages:         0 kB
+ShmemPmdMapped:        0 kB      --->      ShmemPmdMapped:        0 kB
+FilePmdMapped:        0 kB       --->       FilePmdMapped:        0 kB
+Shared_Hugetlb:        0 kB      --->      Shared_Hugetlb:        0 kB
+Private_Hugetlb:       0 kB      --->      Private_Hugetlb:       0 kB
+Swap:                  0 kB      --->      Swap:                  0 kB
+SwapPss:               0 kB      --->      SwapPss:               0 kB
+Locked:                0 kB      --->      Locked:                0 kB
+THPeligible:		0                  --->                  THPeligible:		0
+VmFlags: rd wr mr mw me ac sd    --->   VmFlags: rd wr mr mw me ac sd 
+
+----------------------------------------------------------
+
+[19] -- Wed Aug 25 15:51:55 2021
+
+[20] -- Wed Aug 25 15:51:56 2021
+563ae5b0d000-563ae5b2e000 rw-p 00000000 00:00 0                          [heap]
+Size:                132 kB      --->      Size:                132 kB
+KernelPageSize:        4 kB      --->      KernelPageSize:        4 kB
+MMUPageSize:           4 kB      --->      MMUPageSize:           4 kB
+Rss:                  52 kB      --->      Rss:                  56 kB
+Pss:                  52 kB      --->      Pss:                  56 kB
+Shared_Clean:          0 kB      --->      Shared_Clean:          0 kB
+Shared_Dirty:          0 kB      --->      Shared_Dirty:          0 kB
+Private_Clean:         0 kB      --->      Private_Clean:         0 kB
+Private_Dirty:        52 kB      --->      Private_Dirty:        56 kB
+Referenced:           52 kB      --->      Referenced:           56 kB
+Anonymous:            52 kB      --->      Anonymous:            56 kB
+LazyFree:              0 kB      --->      LazyFree:              0 kB
+AnonHugePages:         0 kB      --->      AnonHugePages:         0 kB
+ShmemPmdMapped:        0 kB      --->      ShmemPmdMapped:        0 kB
+FilePmdMapped:        0 kB       --->       FilePmdMapped:        0 kB
+Shared_Hugetlb:        0 kB      --->      Shared_Hugetlb:        0 kB
+Private_Hugetlb:       0 kB      --->      Private_Hugetlb:       0 kB
+Swap:                  0 kB      --->      Swap:                  0 kB
+SwapPss:               0 kB      --->      SwapPss:               0 kB
+Locked:                0 kB      --->      Locked:                0 kB
+THPeligible:		0                  --->                  THPeligible:		0
+VmFlags: rd wr mr mw me ac sd    --->   VmFlags: rd wr mr mw me ac sd 
+
+----------------------------------------------------------
+
+[21] -- Wed Aug 25 15:51:57 2021
+
+[22] -- Wed Aug 25 15:51:58 2021
+563ae5b0d000-563ae5b2e000 rw-p 00000000 00:00 0                          [heap]
+Size:                132 kB      --->      Size:                132 kB
+KernelPageSize:        4 kB      --->      KernelPageSize:        4 kB
+MMUPageSize:           4 kB      --->      MMUPageSize:           4 kB
+Rss:                  56 kB      --->      Rss:                  60 kB
+Pss:                  56 kB      --->      Pss:                  60 kB
+Shared_Clean:          0 kB      --->      Shared_Clean:          0 kB
+Shared_Dirty:          0 kB      --->      Shared_Dirty:          0 kB
+Private_Clean:         0 kB      --->      Private_Clean:         0 kB
+Private_Dirty:        56 kB      --->      Private_Dirty:        60 kB
+Referenced:           56 kB      --->      Referenced:           60 kB
+Anonymous:            56 kB      --->      Anonymous:            60 kB
+LazyFree:              0 kB      --->      LazyFree:              0 kB
+AnonHugePages:         0 kB      --->      AnonHugePages:         0 kB
+ShmemPmdMapped:        0 kB      --->      ShmemPmdMapped:        0 kB
+FilePmdMapped:        0 kB       --->       FilePmdMapped:        0 kB
+Shared_Hugetlb:        0 kB      --->      Shared_Hugetlb:        0 kB
+Private_Hugetlb:       0 kB      --->      Private_Hugetlb:       0 kB
+Swap:                  0 kB      --->      Swap:                  0 kB
+SwapPss:               0 kB      --->      SwapPss:               0 kB
+Locked:                0 kB      --->      Locked:                0 kB
+THPeligible:		0                  --->                  THPeligible:		0
+VmFlags: rd wr mr mw me ac sd    --->   VmFlags: rd wr mr mw me ac sd 
+
+----------------------------------------------------------
+
+[23] -- Wed Aug 25 15:52:00 2021
+
+[24] -- Wed Aug 25 15:52:01 2021
+563ae5b0d000-563ae5b2e000 rw-p 00000000 00:00 0                          [heap]
+Size:                132 kB      --->      Size:                132 kB
+KernelPageSize:        4 kB      --->      KernelPageSize:        4 kB
+MMUPageSize:           4 kB      --->      MMUPageSize:           4 kB
+Rss:                  60 kB      --->      Rss:                  64 kB
+Pss:                  60 kB      --->      Pss:                  64 kB
+Shared_Clean:          0 kB      --->      Shared_Clean:          0 kB
+Shared_Dirty:          0 kB      --->      Shared_Dirty:          0 kB
+Private_Clean:         0 kB      --->      Private_Clean:         0 kB
+Private_Dirty:        60 kB      --->      Private_Dirty:        64 kB
+Referenced:           60 kB      --->      Referenced:           64 kB
+Anonymous:            60 kB      --->      Anonymous:            64 kB
+LazyFree:              0 kB      --->      LazyFree:              0 kB
+AnonHugePages:         0 kB      --->      AnonHugePages:         0 kB
+ShmemPmdMapped:        0 kB      --->      ShmemPmdMapped:        0 kB
+FilePmdMapped:        0 kB       --->       FilePmdMapped:        0 kB
+Shared_Hugetlb:        0 kB      --->      Shared_Hugetlb:        0 kB
+Private_Hugetlb:       0 kB      --->      Private_Hugetlb:       0 kB
+Swap:                  0 kB      --->      Swap:                  0 kB
+SwapPss:               0 kB      --->      SwapPss:               0 kB
+Locked:                0 kB      --->      Locked:                0 kB
+THPeligible:		0                  --->                  THPeligible:		0
+VmFlags: rd wr mr mw me ac sd    --->   VmFlags: rd wr mr mw me ac sd 
+
+----------------------------------------------------------
+
+[25] -- Wed Aug 25 15:52:02 2021
+
+[26] -- Wed Aug 25 15:52:03 2021
+563ae5b0d000-563ae5b2e000 rw-p 00000000 00:00 0                          [heap]
+Size:                132 kB      --->      Size:                132 kB
+KernelPageSize:        4 kB      --->      KernelPageSize:        4 kB
+MMUPageSize:           4 kB      --->      MMUPageSize:           4 kB
+Rss:                  64 kB      --->      Rss:                  68 kB
+Pss:                  64 kB      --->      Pss:                  68 kB
+Shared_Clean:          0 kB      --->      Shared_Clean:          0 kB
+Shared_Dirty:          0 kB      --->      Shared_Dirty:          0 kB
+Private_Clean:         0 kB      --->      Private_Clean:         0 kB
+Private_Dirty:        64 kB      --->      Private_Dirty:        68 kB
+Referenced:           64 kB      --->      Referenced:           68 kB
+Anonymous:            64 kB      --->      Anonymous:            68 kB
+LazyFree:              0 kB      --->      LazyFree:              0 kB
+AnonHugePages:         0 kB      --->      AnonHugePages:         0 kB
+ShmemPmdMapped:        0 kB      --->      ShmemPmdMapped:        0 kB
+FilePmdMapped:        0 kB       --->       FilePmdMapped:        0 kB
+Shared_Hugetlb:        0 kB      --->      Shared_Hugetlb:        0 kB
+Private_Hugetlb:       0 kB      --->      Private_Hugetlb:       0 kB
+Swap:                  0 kB      --->      Swap:                  0 kB
+SwapPss:               0 kB      --->      SwapPss:               0 kB
+Locked:                0 kB      --->      Locked:                0 kB
+THPeligible:		0                  --->                  THPeligible:		0
+VmFlags: rd wr mr mw me ac sd    --->   VmFlags: rd wr mr mw me ac sd 
+
+----------------------------------------------------------
+
+[27] -- Wed Aug 25 15:52:04 2021
+
+[28] -- Wed Aug 25 15:52:05 2021
+563ae5b0d000-563ae5b2e000 rw-p 00000000 00:00 0                          [heap]
+Size:                132 kB      --->      Size:                132 kB
+KernelPageSize:        4 kB      --->      KernelPageSize:        4 kB
+MMUPageSize:           4 kB      --->      MMUPageSize:           4 kB
+Rss:                  68 kB      --->      Rss:                  72 kB
+Pss:                  68 kB      --->      Pss:                  72 kB
+Shared_Clean:          0 kB      --->      Shared_Clean:          0 kB
+Shared_Dirty:          0 kB      --->      Shared_Dirty:          0 kB
+Private_Clean:         0 kB      --->      Private_Clean:         0 kB
+Private_Dirty:        68 kB      --->      Private_Dirty:        72 kB
+Referenced:           68 kB      --->      Referenced:           72 kB
+Anonymous:            68 kB      --->      Anonymous:            72 kB
+LazyFree:              0 kB      --->      LazyFree:              0 kB
+AnonHugePages:         0 kB      --->      AnonHugePages:         0 kB
+ShmemPmdMapped:        0 kB      --->      ShmemPmdMapped:        0 kB
+FilePmdMapped:        0 kB       --->       FilePmdMapped:        0 kB
+Shared_Hugetlb:        0 kB      --->      Shared_Hugetlb:        0 kB
+Private_Hugetlb:       0 kB      --->      Private_Hugetlb:       0 kB
+Swap:                  0 kB      --->      Swap:                  0 kB
+SwapPss:               0 kB      --->      SwapPss:               0 kB
+Locked:                0 kB      --->      Locked:                0 kB
+THPeligible:		0                  --->                  THPeligible:		0
+VmFlags: rd wr mr mw me ac sd    --->   VmFlags: rd wr mr mw me ac sd 
+
+----------------------------------------------------------
+
+[29] -- Wed Aug 25 15:52:06 2021
+
+[30] -- Wed Aug 25 15:52:07 2021
+563ae5b0d000-563ae5b2e000 rw-p 00000000 00:00 0                          [heap]
+Size:                132 kB      --->      Size:                132 kB
+KernelPageSize:        4 kB      --->      KernelPageSize:        4 kB
+MMUPageSize:           4 kB      --->      MMUPageSize:           4 kB
+Rss:                  72 kB      --->      Rss:                  76 kB
+Pss:                  72 kB      --->      Pss:                  76 kB
+Shared_Clean:          0 kB      --->      Shared_Clean:          0 kB
+Shared_Dirty:          0 kB      --->      Shared_Dirty:          0 kB
+Private_Clean:         0 kB      --->      Private_Clean:         0 kB
+Private_Dirty:        72 kB      --->      Private_Dirty:        76 kB
+Referenced:           72 kB      --->      Referenced:           76 kB
+Anonymous:            72 kB      --->      Anonymous:            76 kB
+LazyFree:              0 kB      --->      LazyFree:              0 kB
+AnonHugePages:         0 kB      --->      AnonHugePages:         0 kB
+ShmemPmdMapped:        0 kB      --->      ShmemPmdMapped:        0 kB
+FilePmdMapped:        0 kB       --->       FilePmdMapped:        0 kB
+Shared_Hugetlb:        0 kB      --->      Shared_Hugetlb:        0 kB
+Private_Hugetlb:       0 kB      --->      Private_Hugetlb:       0 kB
+Swap:                  0 kB      --->      Swap:                  0 kB
+SwapPss:               0 kB      --->      SwapPss:               0 kB
+Locked:                0 kB      --->      Locked:                0 kB
+THPeligible:		0                  --->                  THPeligible:		0
+VmFlags: rd wr mr mw me ac sd    --->   VmFlags: rd wr mr mw me ac sd 
+
+----------------------------------------------------------
+
+[31] -- Wed Aug 25 15:52:08 2021
+
+[32] -- Wed Aug 25 15:52:09 2021
+563ae5b0d000-563ae5b2e000 rw-p 00000000 00:00 0                          [heap]
+Size:                132 kB      --->      Size:                132 kB
+KernelPageSize:        4 kB      --->      KernelPageSize:        4 kB
+MMUPageSize:           4 kB      --->      MMUPageSize:           4 kB
+Rss:                  76 kB      --->      Rss:                  80 kB
+Pss:                  76 kB      --->      Pss:                  80 kB
+Shared_Clean:          0 kB      --->      Shared_Clean:          0 kB
+Shared_Dirty:          0 kB      --->      Shared_Dirty:          0 kB
+Private_Clean:         0 kB      --->      Private_Clean:         0 kB
+Private_Dirty:        76 kB      --->      Private_Dirty:        80 kB
+Referenced:           76 kB      --->      Referenced:           80 kB
+Anonymous:            76 kB      --->      Anonymous:            80 kB
+LazyFree:              0 kB      --->      LazyFree:              0 kB
+AnonHugePages:         0 kB      --->      AnonHugePages:         0 kB
+ShmemPmdMapped:        0 kB      --->      ShmemPmdMapped:        0 kB
+FilePmdMapped:        0 kB       --->       FilePmdMapped:        0 kB
+Shared_Hugetlb:        0 kB      --->      Shared_Hugetlb:        0 kB
+Private_Hugetlb:       0 kB      --->      Private_Hugetlb:       0 kB
+Swap:                  0 kB      --->      Swap:                  0 kB
+SwapPss:               0 kB      --->      SwapPss:               0 kB
+Locked:                0 kB      --->      Locked:                0 kB
+THPeligible:		0                  --->                  THPeligible:		0
+VmFlags: rd wr mr mw me ac sd    --->   VmFlags: rd wr mr mw me ac sd 
+
+----------------------------------------------------------
+
+[33] -- Wed Aug 25 15:52:10 2021
+
+[34] -- Wed Aug 25 15:52:11 2021
+563ae5b0d000-563ae5b2e000 rw-p 00000000 00:00 0                          [heap]
+Size:                132 kB      --->      Size:                132 kB
+KernelPageSize:        4 kB      --->      KernelPageSize:        4 kB
+MMUPageSize:           4 kB      --->      MMUPageSize:           4 kB
+Rss:                  80 kB      --->      Rss:                  84 kB
+Pss:                  80 kB      --->      Pss:                  84 kB
+Shared_Clean:          0 kB      --->      Shared_Clean:          0 kB
+Shared_Dirty:          0 kB      --->      Shared_Dirty:          0 kB
+Private_Clean:         0 kB      --->      Private_Clean:         0 kB
+Private_Dirty:        80 kB      --->      Private_Dirty:        84 kB
+Referenced:           80 kB      --->      Referenced:           84 kB
+Anonymous:            80 kB      --->      Anonymous:            84 kB
+LazyFree:              0 kB      --->      LazyFree:              0 kB
+AnonHugePages:         0 kB      --->      AnonHugePages:         0 kB
+ShmemPmdMapped:        0 kB      --->      ShmemPmdMapped:        0 kB
+FilePmdMapped:        0 kB       --->       FilePmdMapped:        0 kB
+Shared_Hugetlb:        0 kB      --->      Shared_Hugetlb:        0 kB
+Private_Hugetlb:       0 kB      --->      Private_Hugetlb:       0 kB
+Swap:                  0 kB      --->      Swap:                  0 kB
+SwapPss:               0 kB      --->      SwapPss:               0 kB
+Locked:                0 kB      --->      Locked:                0 kB
+THPeligible:		0                  --->                  THPeligible:		0
+VmFlags: rd wr mr mw me ac sd    --->   VmFlags: rd wr mr mw me ac sd 
+
+----------------------------------------------------------
+
+[35] -- Wed Aug 25 15:52:12 2021
+
+[36] -- Wed Aug 25 15:52:13 2021
+563ae5b0d000-563ae5b2e000 rw-p 00000000 00:00 0                          [heap]
+Size:                132 kB      --->      Size:                132 kB
+KernelPageSize:        4 kB      --->      KernelPageSize:        4 kB
+MMUPageSize:           4 kB      --->      MMUPageSize:           4 kB
+Rss:                  84 kB      --->      Rss:                  88 kB
+Pss:                  84 kB      --->      Pss:                  88 kB
+Shared_Clean:          0 kB      --->      Shared_Clean:          0 kB
+Shared_Dirty:          0 kB      --->      Shared_Dirty:          0 kB
+Private_Clean:         0 kB      --->      Private_Clean:         0 kB
+Private_Dirty:        84 kB      --->      Private_Dirty:        88 kB
+Referenced:           84 kB      --->      Referenced:           88 kB
+Anonymous:            84 kB      --->      Anonymous:            88 kB
+LazyFree:              0 kB      --->      LazyFree:              0 kB
+AnonHugePages:         0 kB      --->      AnonHugePages:         0 kB
+ShmemPmdMapped:        0 kB      --->      ShmemPmdMapped:        0 kB
+FilePmdMapped:        0 kB       --->       FilePmdMapped:        0 kB
+Shared_Hugetlb:        0 kB      --->      Shared_Hugetlb:        0 kB
+Private_Hugetlb:       0 kB      --->      Private_Hugetlb:       0 kB
+Swap:                  0 kB      --->      Swap:                  0 kB
+SwapPss:               0 kB      --->      SwapPss:               0 kB
+Locked:                0 kB      --->      Locked:                0 kB
+THPeligible:		0                  --->                  THPeligible:		0
+VmFlags: rd wr mr mw me ac sd    --->   VmFlags: rd wr mr mw me ac sd 
+
+----------------------------------------------------------

@@ -70,7 +70,7 @@ int main(int argc, char *argv[]) {
 
     int grep_block_count = 0;
     char grep_block[__SMAPTRACK_BLOCK_LINE_MAXIMUM__][64];
-    int smaptrack_fd = STDOUT;
+    FILE* smaptrack_file = stdout;
     if (argc < 2) {
     
 		printf("Usage : %s [# pid] [# duration(sec)]  [--grep=string (option)]\n [--data_count=# (option)] [--file=string (option)] \n", argv[0]);
@@ -98,14 +98,14 @@ int main(int argc, char *argv[]) {
                 sprintf(buffer,"%s",c_p+1);
                 buffer[strlen(buffer)] = '\0';
                 smaptrack_data_count = atoi(buffer);
-           }else if( (c_p =strtsr(argv[iter], "--file"))!=NULL){
-		c_p = strstr(c_p,"=");
-		char buffer[100];
-		sprintf(buffer,"%s",c_p+1);
-		buffer[strlen(buffer)] = '\0';
-		smaptrack_stdout = open(buffer,O_WRONLY|O_CREAT|O_APPEND);	
-		
-		}
+           }else if( (c_p = strstr(argv[iter], "--file"))!=NULL){
+		        c_p = strstr(c_p,"=");
+		        char buffer[100];
+        		sprintf(buffer,"%s",c_p+1);
+	        	buffer[strlen(buffer)] = '\0';
+	        	smaptrack_file = fopen(buffer,"w+");	
+		    
+            }
 
             
         }
@@ -142,7 +142,7 @@ int main(int argc, char *argv[]) {
     smap_elem_line_count = EvaluateSmapElemLineCount(fd);   
     lseek(fd,0,SEEK_SET);
 #ifdef __SMAPTRACK_DEBUG__
-    fprintf(smaptrack_fd,"ELEM COUNT = %d\n",smap_elem_line_count); 
+    fprintf(smaptrack_file,"ELEM COUNT = %d\n",smap_elem_line_count); 
 #endif	
    
    //string buffer..
@@ -157,7 +157,7 @@ int main(int argc, char *argv[]) {
         time_t curr_time = time(NULL);
         char * time_str = ctime(&curr_time);
         time_str[strlen(time_str)-1] = '\0';
-        fprintf(smaptrack_fd,"\n[%ld] -- %s\n",trial_count++,time_str);
+        fprintf(smaptrack_file,"\n[%ld] -- %s\n",trial_count++,time_str);
 
 		int count = 0;
 		int i=0,j=0;
@@ -237,16 +237,17 @@ if(__SMAPTRACK_GREP_TRACK__ == 1){
                      for(j=0;j<smap_elem_line_count;j++){
                             
                          if(j==0)
-                             fprintf(smaptrack_fd,"%s\n",smapsb[i].lines[j]);
+                             fprintf(smaptrack_file,"%s\n",smapsb[i].lines[j]);
                          else{
-                         fprintf(smaptracK_fd,"%-30s%-10s%30s\n",smapsbprev[i].lines[j],"   --->",smapsb[i].lines[j]);
+                         fprintf(smaptrack_file,"%-30s%-10s%30s\n",smapsbprev[i].lines[j],"   --->",smapsb[i].lines[j]);
                          }
                          strcpy(smapsbprev[i].lines[j], smapsb[i].lines[j]);
                          
                     }
                     
-                    fprintf(fd,"\n--------------------------------------------------\n");
+                    fprintf(smaptrack_file,"\n--------------------------------------------------\n");
                     }
+                    fflush(smaptrack_file);
                     break;
 
                 }
@@ -265,14 +266,15 @@ else
                     for(j=0;j<smap_elem_line_count;j++){
                            //print! print!  
                             if(j==0)
-                                fprintf(smaptrack_fd,"%s\n",smapsb[i].lines[j]);
+                                fprintf(smaptrack_file,"%s\n",smapsb[i].lines[j]);
                             else{
-                            fprintf(smaptrack_fd,"%-30s%-10s%30s\n",smapsbprev[i].lines[j],"   --->",smapsb[i].lines[j]);
+                            fprintf(smaptrack_file,"%-30s%-10s%30s\n",smapsbprev[i].lines[j],"   --->",smapsb[i].lines[j]);
                             }
                             strcpy(smapsbprev[i].lines[j], smapsb[i].lines[j]);
                           
                     }
-                    fprintf(smaptrack_fd,"\n----------------------------------------------------------\n");
+                    fprintf(smaptrack_file,"\n----------------------------------------------------------\n");
+                    fflush(smaptrack_file);
                     break;
                 }
             }
