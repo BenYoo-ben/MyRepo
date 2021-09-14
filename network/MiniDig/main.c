@@ -8,11 +8,10 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 
-#define __MINI_DIG_DNS_SERVER_ADDRESS__ "8.8.8.8"
 #define __MINI_DIG_DNS_PORT__ 53
 
 char ips[100][16];
-int MiniDigSendQuery(char *s){
+int MiniDigSendQuery(char *s, char *dns_server_addr){
 	
 	int sock;
 	sock = socket(PF_INET, SOCK_DGRAM, 0);
@@ -26,7 +25,7 @@ int MiniDigSendQuery(char *s){
 	struct sockaddr_in dns_addr;
 	memset(&dns_addr, 0, addr_len);
 	dns_addr.sin_family = AF_INET;
-    dns_addr.sin_addr.s_addr = inet_addr(__MINI_DIG_DNS_SERVER_ADDRESS__ );
+    dns_addr.sin_addr.s_addr = inet_addr(dns_server_addr);
     dns_addr.sin_port = htons(__MINI_DIG_DNS_PORT__ );
 
 
@@ -99,9 +98,7 @@ int MiniDigSendQuery(char *s){
 		if(s[i]=='.' || s[i]=='\0'){
 			tmp_buf[j]=0;
 			printf("COPYING : %s :\n",tmp_buf);
-			outgo_buffer[outgo_write_idx] = j/10;
-			outgo_write_idx++;
-			outgo_buffer[outgo_write_idx] = j%10;
+			outgo_buffer[outgo_write_idx] = j;
 			outgo_write_idx++;
 			int orig_j = j;
 
@@ -133,9 +130,23 @@ int MiniDigSendQuery(char *s){
 
 	}
 	i=outgo_write_idx;
+    //end of name
 	outgo_buffer[i] = 0; i++;
-	outgo_buffer[i] = 1; i++;
-	outgo_buffer[i] = 0; i++;
+    
+    //qtype
+    outgo_buffer[i] = 0; i++;
+    
+    //any
+    //outgo_buffer[i] = 255; i++;
+	
+    //ipv4 only
+    outgo_buffer[i] = 1; i++;
+
+    //host address
+    //outgo_buffer[i] =13; i++;
+    
+    //qclass
+    outgo_buffer[i] = 0; i++;
 	outgo_buffer[i] = 1; i++;
 
 	for(i=0;i<outgo_write_idx;i++)
@@ -143,7 +154,7 @@ int MiniDigSendQuery(char *s){
 
 
 	struct sockaddr_in me_addr;
-	if((sendto(sock, outgo_buffer, 96, 0, (struct sockaddr *)&dns_addr,addr_len )) < 0) {
+	if((sendto(sock, outgo_buffer, outgo_write_idx+5, 0, (struct sockaddr *)&dns_addr,addr_len )) < 0) {
         perror("sendto fail");
         exit(0);
     	}
@@ -152,9 +163,9 @@ int MiniDigSendQuery(char *s){
 		
 }
 
-int MiniDigGetIPList(char *s){
+int MiniDigGetIPList(char *s, char *dns_server_addr){
 
-	int sock = MiniDigSendQuery(s);
+	int sock = MiniDigSendQuery(s,dns_server_addr);
 
 	char recv_buf[1000];
 	int read_bytes = read(sock,recv_buf, 1000);
@@ -172,7 +183,7 @@ int MiniDigGetIPList(char *s){
 int main(int argc, char *argv[]){
 
 	
-	MiniDigGetIPList("facebook.com");
+	MiniDigGetIPList("naver.com","192.168.254.1");
 
 
 }
