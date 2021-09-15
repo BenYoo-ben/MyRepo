@@ -7,6 +7,7 @@
 #include <sys/types.h>
 #include <arpa/inet.h>
 #include <unistd.h>
+#include <fcntl.h>
 
 #define __MINI_DIG_DNS_PORT__ 53
 #define __MINI_DIG_STORE_LOCATION__ "/var/urlfilter/"
@@ -222,11 +223,12 @@ void MiniDigIptablesAdd(char *string ,int count){
     while(i<count){
         memset(buffer,0x0,100);
         sprintf(buffer,"iptables -I INPUT 1 -s %s/32 -j DROP",mini_dig_ips[i]);
-        memset(buffer,0x0,100);
-        sprintf(buffer,"%s#",mini_dig_ips[i]);
         write(fd,mini_dig_ips[i],16);
         system(buffer);
-        i++;
+        memset(buffer,0x0,100);
+        sprintf(buffer,"%s#",mini_dig_ips[i]);
+
+       	i++;
     }
     
     close(fd);
@@ -234,20 +236,54 @@ void MiniDigIptablesAdd(char *string ,int count){
 
 }
 
-void MiniDigIptablesRemove(char *string, int count){
+void MiniDigIptablesRemove(char *string){
    
 
-   char buffer[100];
-   memset(buffer,0x0,100);
+   char buffer[200];
+   memset(buffer,0x0,200);
    sprintf(buffer,"%s%s",__MINI_DIG_STORE_LOCATION__,string);
    int fd = open(buffer,O_RDONLY);
-   if(
+   int i = 0,j=0 ;
+   int configured_count = 0;
+   char ip[16];
+   char cmd_buf[100];
+   if(fd < 0){
+   	printf("Iptables Remove, something went really bad.\n");
+	exit(1);
+   }
+
+   int file_size = read(fd,buffer,100);
+
+   while(1){
+   	if(buffer[i] == '#'){
+		ip[j] = '\0';
+		memset(cmd_buf,0x0,100);
+		sprintf(cmd_buf,"iptables -D INPUT -s %s/32 -j DROP",ip);	
+		system(cmd_buf);
+		j=0;
+		if(i>=file_size)
+			break;		
+	}
+	else{
+		ip[j] = buffer[i];
+		j++; 
+	}
+   	i++;
+   } 
+   close(fd);
+   memset(buffer,0x0,200);
+   sprintf(buffer,"%s%s",__MINI_DIG_STORE_LOCATION__,string);
+   remove(buffer);
+
+ 
 }
 
 int main(int argc, char *argv[]){
 
 	
-    MiniDigIptablesAdd(MiniDigGetIPList("naver.com","192.168.254.1"));
+    MiniDigIptablesAdd("naver.com",MiniDigGetIPList("naver.com","8.8.8.8"));
+    getchar();
 
+    MiniDigIptablesRemove("naver.com");
 
 }
