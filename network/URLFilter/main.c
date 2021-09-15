@@ -9,8 +9,13 @@
 #include <unistd.h>
 
 #define __MINI_DIG_DNS_PORT__ 53
+#define __MINI_DIG_STORE_LOCATION__ "/var/urlfilter/"
 
-char ips[100][16];
+char mini_dig_ips[100][16];
+int mini_dig_query_end_idx = -1;
+
+
+
 int MiniDigSendQuery(char *s, char *dns_server_addr){
 	
 	int sock;
@@ -153,8 +158,8 @@ int MiniDigSendQuery(char *s, char *dns_server_addr){
 		printf("%c ",outgo_buffer[i]);
 
 
-	struct sockaddr_in me_addr;
-	if((sendto(sock, outgo_buffer, outgo_write_idx+5, 0, (struct sockaddr *)&dns_addr,addr_len )) < 0) {
+	mini_dig_query_end_idx = outgo_write_idx+5;
+    if((sendto(sock, outgo_buffer,mini_dig_query_end_idx, 0, (struct sockaddr *)&dns_addr,addr_len )) < 0) {
         perror("sendto fail");
         exit(0);
     	}
@@ -172,18 +177,77 @@ int MiniDigGetIPList(char *s, char *dns_server_addr){
 	recv_buf[read_bytes] = '\0';
 
 	printf("READ : [%s]\n",recv_buf);
-	char buf[3];
-	buf[0] = recv_buf[6];
-	buf[1] = recv_buf[7];
-	buf[2] = '\0';
-	uint16_t answer_count = atoi(buf);
+    //parse answers...
+	uint16_t answer_count =  (256 * recv_buf[6]) + recv_buf[7];
+    printf("# of answers : %d\n",answer_count);
+    
+    int found_ip_count = 0;
 
+    uint8_t c = 0;
+    int i = mini_dig_query_end_idx;
+    while(found_ip_count < answer_count){
+    
+        c = recv_buf[i];
+        if( (c & (0xc0)) == (0xc0)){
+            printf("Q found : %d\n",found_ip_count);
+            i += 12;
+            
+            c = recv_buf[i];
+            sprintf(mini_dig_ips[found_ip_count],"%u.",c); i++; c = recv_buf[i];
+            sprintf(mini_dig_ips[found_ip_count]+strlen(mini_dig_ips[found_ip_count]),"%u.",c); i++; c = recv_buf[i];
+            sprintf(mini_dig_ips[found_ip_count]+strlen(mini_dig_ips[found_ip_count]),"%u.",c); i++; c = recv_buf[i];
+            sprintf(mini_dig_ips[found_ip_count]+strlen(mini_dig_ips[found_ip_count]),"%u",c); i++; c = recv_buf[i];
+            sprintf(mini_dig_ips[found_ip_count]+strlen(mini_dig_ips[found_ip_count]),"%c",'\0'); c = recv_buf[i];
+            printf("DNS IP : %s\n",mini_dig_ips[found_ip_count]);
+
+            found_ip_count ++;
+        }
+        else{
+            i++;
+        }
+    }
+
+    return found_ip_count;
+}
+
+void MiniDigIptablesAdd(char *string ,int count){
+
+    int i=0;
+    char buffer[100];
+   
+    memset(buffer,0x0,100);
+    sprintf(buffer,"%s%s",__MINI_DIG_STORE_LOCATION__,string);
+    int fd = open(buffer,O_RDWR);
+    
+    while(i<count){
+        memset(buffer,0x0,100);
+        sprintf(buffer,"iptables -I INPUT 1 -s %s/32 -j DROP",mini_dig_ips[i]);
+        memset(buffer,0x0,100);
+        sprintf(buffer,"%s#",mini_dig_ips[i]);
+        write(fd,mini_dig_ips[i],16);
+        system(buffer);
+        i++;
+    }
+    
+    close(fd);
+    system("iptables-save");
+
+}
+
+void MiniDigIptablesRemove(char *string, int count){
+   
+
+   char buffer[100];
+   memset(buffer,0x0,100);
+   sprintf(buffer,"%s%s",__MINI_DIG_STORE_LOCATION__,string);
+   int fd = open(buffer,O_RDONLY);
+   if(
 }
 
 int main(int argc, char *argv[]){
 
 	
-	MiniDigGetIPList("naver.com","192.168.254.1");
+    MiniDigIptablesAdd(MiniDigGetIPList("naver.com","192.168.254.1"));
 
 
 }
