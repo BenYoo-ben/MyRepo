@@ -5,9 +5,12 @@
 #include <stdlib.h>
 #include <netinet/in.h>
 #include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/select.h>
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <fcntl.h>
+
 
 #define __MINI_DIG_DNS_PORT__ 53
 #define __MINI_DIG_STORE_LOCATION__ "/var/urlfilter/"
@@ -172,7 +175,24 @@ int MiniDigSendQuery(char *s, char *dns_server_addr){
 int MiniDigGetIPList(char *s, char *dns_server_addr){
 
 	int sock = MiniDigSendQuery(s,dns_server_addr);
+    
+    fd_set filedesc_set;
+    FD_ZERO(&filedesc_set);
+    FD_SET(sock,&filedesc_set);
 
+    struct timeval timeout;
+    timeout.tv_sec = 5;
+    timeout.tv_usec = 0;
+
+    int rv = select(sock +1 , &filedesc_set, NULL, NULL, &timeout);
+    if(rv == -1) //Boom. Error.
+        return -1;
+    if(rv == 0){
+    //DNS server timeout, wrong DNS address?
+        printf("DNS server timeout\n");
+        return -2; 
+    }
+    else {
 	char recv_buf[1000];
 	int read_bytes = read(sock,recv_buf, 1000);
 	recv_buf[read_bytes] = '\0';
@@ -207,36 +227,49 @@ int MiniDigGetIPList(char *s, char *dns_server_addr){
             i++;
         }
     }
-
     return found_ip_count;
+    }
 }
 
-void MiniDigIptablesAdd(char *string ,int count){
+int MiniDigIptablesAdd(char *string ,int count){
 
     int i=0;
     char buffer[100];
    
     memset(buffer,0x0,100);
     sprintf(buffer,"%s%s",__MINI_DIG_STORE_LOCATION__,string);
-    int fd = open(buffer,O_RDWR);
     
+    //check for directroy
+    struct stat st = {0};
+
+    if(stat(__MINI_DIG_STORE_LOCATION__,&st) == -1){
+        mkdir(__MINI_DIG_STORE_LOCATION__,0700);
+    }
+
+    int fd = open(buffer,O_CREAT|O_RDWR);
+   
+   if(count < 0 ){
+    perror("DNS server error, not available ! \n");
+    return -1;
+   }
+   else{
+
     while(i<count){
         memset(buffer,0x0,100);
-        sprintf(buffer,"iptables -I INPUT 1 -s %s/32 -j DROP",mini_dig_ips[i]);
-        write(fd,mini_dig_ips[i],16);
+        sprintf(buffer,"iptables -w -I INPUT 1 -s %s/32 -j DROP",mini_dig_ips[i]);
         system(buffer);
         memset(buffer,0x0,100);
-        sprintf(buffer,"%s#",mini_dig_ips[i]);
-
-       	i++;
+        sprintf(buffer,"%s%c",mini_dig_ips[i],'#');
+        write(fd,buffer,strlen(buffer));
+       	
+        i++;
     }
-    
+   } 
     close(fd);
-    system("iptables-save");
-
+    return 0;
 }
 
-void MiniDigIptablesRemove(char *string){
+int MiniDigIptablesRemove(char *string){
    
 
    char buffer[200];
@@ -248,20 +281,23 @@ void MiniDigIptablesRemove(char *string){
    char ip[16];
    char cmd_buf[100];
    if(fd < 0){
-   	printf("Iptables Remove, something went really bad.\n");
+   printf("is valid file %s%s ? \n",__MINI_DIG_STORE_LOCATION__,string);
 	exit(1);
    }
 
-   int file_size = read(fd,buffer,100);
-
+   int file_size = read(fd,buffer,200);
+   if(file_size >  15 ){
    while(1){
-   	if(buffer[i] == '#'){
-		ip[j] = '\0';
+   	
+    if(buffer[i] == '#'){
+		printf("i : %d\n",i);
+        ip[j] = '\0';
 		memset(cmd_buf,0x0,100);
-		sprintf(cmd_buf,"iptables -D INPUT -s %s/32 -j DROP",ip);	
+		sprintf(cmd_buf,"iptables -w -D INPUT -s %s/32 -j DROP",ip);	
 		system(cmd_buf);
 		j=0;
-		if(i>=file_size)
+        //EOF
+		if(i>=(file_size-1) )
 			break;		
 	}
 	else{
@@ -270,19 +306,23 @@ void MiniDigIptablesRemove(char *string){
 	}
    	i++;
    } 
-   close(fd);
+   
    memset(buffer,0x0,200);
    sprintf(buffer,"%s%s",__MINI_DIG_STORE_LOCATION__,string);
    remove(buffer);
+ }
+ else{
+    printf("is valid file %s%s ? \n",__MINI_DIG_STORE_LOCATION__,string);
+    exit(1);
+ }
 
- 
+ close(fd);
 }
 
 int main(int argc, char *argv[]){
 
 	
-    MiniDigIptablesAdd("naver.com",MiniDigGetIPList("naver.com","8.8.8.8"));
-    getchar();
+    MiniDigIptablesAdd("naver.com",MiniDigGetIPList("naver.com","1.2.3.4"));
 
     MiniDigIptablesRemove("naver.com");
 
