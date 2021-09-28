@@ -343,8 +343,32 @@ int MiniDigIptablesRemove(char *string) {
 
 int main(int argc, char *argv[]) {
 
-	MiniDigIptablesAdd("naver.com", MiniDigGetIPList("naver.com", "1.2.3.4"));
+	if(0){
+		wrong_arg_seq :
+			printf("Usage : %s [Action: 'A' or 'D'] [example.com] [DNS IP, only in a mode] \n",argv[0]);
+			return 1;
+	}
 
-	MiniDigIptablesRemove("naver.com");
+	if(argc<2){
+		goto wrong_arg_seq;
+
+	}
+	else if(argv[1][0]=='A'){
+		if(argc!=4){
+			goto wrong_arg_seq;
+		}
+
+		MiniDigIptablesAdd(argv[2],MiniDigGetIPList(argv[2],argv[3]));
+		return 0;
+	}
+	else if(argv[1][0]=='D')
+	{
+		if(argc!=3){
+			goto wrong_arg_seq;
+		}
+
+		MiniDigIptablesRemove(argv[2]);
+		return 0;
+	}
 
 }
