@@ -73,7 +73,7 @@ int MiniDigSendQuery(char *s, char *dns_server_addr) {
 	dns_query_header += (opcode << p);
 	p += 4;
 
-	dns_query_header += (opcode << p);
+	dns_query_header += (qr << p);
 
 	char outgo_buffer[100];
 
