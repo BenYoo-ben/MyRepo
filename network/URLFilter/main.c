@@ -301,7 +301,6 @@ int MiniDigIptablesRemove(char *string) {
 	sprintf(buffer, "%s%s", __MINI_DIG_STORE_LOCATION__, string);
 	int fd = open(buffer, O_RDONLY);
 	int i = 0, j = 0;
-	int configured_count = 0;
 	char ip[16];
 	char cmd_buf[100];
 	if (fd < 0) {
@@ -339,6 +338,7 @@ int MiniDigIptablesRemove(char *string) {
 	}
 
 	close(fd);
+	return 0;
 }
 
 int main(int argc, char *argv[]) {
