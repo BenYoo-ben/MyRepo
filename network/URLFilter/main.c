@@ -369,6 +369,8 @@ int main(int argc, char *argv[]) {
 
 		MiniDigIptablesRemove(argv[2]);
 		return 0;
-	}
+	}else{
+        goto wrong_arg_seq;
+    }
 
 }
