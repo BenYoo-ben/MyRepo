@@ -284,7 +284,7 @@ int MiniDigIptablesAdd(char *string, int count) {
 				mini_dig_ips[i]);
 			system(buffer);
 			memset(buffer, 0x0, 100);
-            sprintf(buffer, "iptables -w -I INPUT 1 -p udp -s %s/32 -j DROP",
+            sprintf(buffer, "iptables -w -I INPUT 1 -p udp --dport 53 -s %s/32 -j DROP",
                mini_dig_ips[i]);
             system(buffer);
             memset(buffer,0x0,100);
@@ -323,7 +323,7 @@ int MiniDigIptablesRemove(char *string) {
 				sprintf(cmd_buf, "iptables -w -D INPUT -p tcp -s %s/32 -j DROP", ip);
 				system(cmd_buf);
 				memset(cmd_buf,0x0,100);
-                sprintf(cmd_buf, "iptables -w -D INPUT -p udp -s %s/32 -j DROP",ip);
+                sprintf(cmd_buf, "iptables -w -D INPUT -p udp --dport 53 -s %s/32 -j DROP",ip);
                 system(cmd_buf); 
                 j = 0;
 				//EOF
