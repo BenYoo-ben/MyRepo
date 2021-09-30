@@ -277,18 +277,35 @@ int MiniDigIptablesAdd(char *string, int count) {
 		perror("DNS server error, not available ! \n");
 		return -1;
 	} else {
-
+        //adding iptables rules for dropping packets.
 		while (i < count) {
+
+        //for local host(INPUT rules), deny all TCP
 			memset(buffer, 0x0, 100);
 			sprintf(buffer, "iptables -w -I INPUT 1 -p tcp -s %s/32 -j DROP",
 				mini_dig_ips[i]);
 			system(buffer);
-			memset(buffer, 0x0, 100);
-            sprintf(buffer, "iptables -w -I INPUT 1 -p udp --dport 53 -s %s/32 -j DROP",
-               mini_dig_ips[i]);
+			
+            //DNS(port 53)
+            memset(buffer, 0x0, 100);
+            sprintf(buffer, "iptables -w -I INPUT 1 -p udp --dport %d -s %s/32 -j DROP",
+               __MINI_DIG_DNS_PORT__,mini_dig_ips[i]);
             system(buffer);
             memset(buffer,0x0,100);
-			sprintf(buffer, "%s%c", mini_dig_ips[i], '#');
+	
+        //for other hosts(FORWARD rules), deny all TCP
+            memset(buffer, 0x0, 100);
+			sprintf(buffer, "iptables -w -I FORWARD 1 -p tcp -s %s/32 -j DROP",
+				mini_dig_ips[i]);
+			system(buffer);
+
+            //DNS(port 53)
+            memset(buffer, 0x0, 100);
+			sprintf(buffer, "iptables -w -I FORWARD 1 -p udp --dport %d -s %s/32 -j DROP",
+				__MINI_DIG_DNS_PORT__,mini_dig_ips[i]);
+			system(buffer);
+
+            sprintf(buffer, "%s%c", mini_dig_ips[i], '#');
 			write(fd, buffer, strlen(buffer));
 
 			i++;
@@ -314,17 +331,32 @@ int MiniDigIptablesRemove(char *string) {
 
 	int file_size = read(fd, buffer, 200);
 	if (file_size > 15) {
-		while (1) {
+		
+            //Delete rules from written DROP rules in iptables(filter)
+
+        while (1) {
 
 			if (buffer[i] == '#') {
 				printf("i : %d\n", i);
 				ip[j] = '\0';
-				memset(cmd_buf, 0x0, 100);
+			//for local traffics(TCP, DNS)
+                memset(cmd_buf, 0x0, 100);
 				sprintf(cmd_buf, "iptables -w -D INPUT -p tcp -s %s/32 -j DROP", ip);
 				system(cmd_buf);
-				memset(cmd_buf,0x0,100);
-                sprintf(cmd_buf, "iptables -w -D INPUT -p udp --dport 53 -s %s/32 -j DROP",ip);
+
+                memset(cmd_buf,0x0,100);
+                sprintf(cmd_buf, "iptables -w -D INPUT -p udp --dport %d -s %s/32 -j DROP",__MINI_DIG_DNS_PORT__,ip);
                 system(cmd_buf); 
+                
+            //for other traffics(TCP, DNS)    
+                memset(cmd_buf, 0x0, 100);
+				sprintf(cmd_buf, "iptables -w -D FORWARD -p tcp -s %s/32 -j DROP", ip);
+				system(cmd_buf);
+
+                memset(cmd_buf, 0x0, 100);
+				sprintf(cmd_buf, "iptables -w -D FORWARD -p udp --dport %d -s %s/32 -j DROP",__MINI_DIG_DNS_PORT__,ip);
+				system(cmd_buf);
+
                 j = 0;
 				//EOF
 				if (i >= (file_size - 1))
