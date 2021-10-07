@@ -106,20 +106,16 @@ int MiniDigSendQuery(char *s, char *dns_server_addr) {
 	int outgo_write_idx = 12;
 	int i = 0, j = 0;
 	char tmp_buf[99] = { 0, };
-	printf(":%s:\n", s);
 	while (1) {
 		if (s[i] == '.' || s[i] == '\0') {
 			tmp_buf[j] = 0;
-			printf("COPYING : %s :\n", tmp_buf);
 			outgo_buffer[outgo_write_idx] = j;
 			outgo_write_idx++;
 			int orig_j = j;
 
 			j--;
 			for (; j >= 0; j--) {
-				printf("::%c::\n", tmp_buf[j]);
 				outgo_buffer[outgo_write_idx + j] = tmp_buf[j];
-				printf("%d-%c wrote\n", j, outgo_buffer[outgo_write_idx + j]);
 			}
 			outgo_write_idx += orig_j;
 
@@ -130,9 +126,7 @@ int MiniDigSendQuery(char *s, char *dns_server_addr) {
 			i++;
 
 		} else {
-			printf("i :%d, j :%d\n", i, j);
 			tmp_buf[j] = s[i];
-			printf("copy : %d-%c\n", j, tmp_buf[j]);
 			i++;
 			j++;
 		}
@@ -162,9 +156,6 @@ int MiniDigSendQuery(char *s, char *dns_server_addr) {
 	i++;
 	outgo_buffer[i] = 1;
 	i++;
-
-	for (i = 0; i < outgo_write_idx; i++)
-		printf("%c ", outgo_buffer[i]);
 
 	mini_dig_query_end_idx = outgo_write_idx + 5;
 	if ((sendto(sock, outgo_buffer, mini_dig_query_end_idx, 0,
@@ -202,7 +193,6 @@ int MiniDigGetIPList(char *s, char *dns_server_addr) {
 		int read_bytes = read(sock, recv_buf, 1024);
 		recv_buf[read_bytes] = '\0';
 
-		printf("READ : [%s]\n", recv_buf);
 		//parse answers...
 		uint16_t answer_count = (256 * recv_buf[6]) + recv_buf[7];
 		printf("# of answers : %d\n", answer_count);
@@ -215,7 +205,6 @@ int MiniDigGetIPList(char *s, char *dns_server_addr) {
 
 			c = recv_buf[i];
 			if ((c & (0xc0)) == (0xc0)) {
-				printf("Q found : %d\n", found_ip_count);
 				i += 12;
 
 				c = recv_buf[i];
@@ -337,7 +326,6 @@ int MiniDigIptablesRemove(char *string) {
         while (1) {
 
 			if (buffer[i] == '#') {
-				printf("i : %d\n", i);
 				ip[j] = '\0';
 			//for local traffics(TCP, DNS)
                 memset(cmd_buf, 0x0, 100);
