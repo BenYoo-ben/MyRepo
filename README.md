@@ -21,7 +21,7 @@
  use temporary file in /var to keep track of filtered IP lists.  
  
 ### OS 
- ##### ViewIptablesChange  
+ ##### DynamicIptables  
  prints results of iptables command in specific durations.  
  could be useful when you have to see rules that packets are going through  
  
@@ -29,4 +29,9 @@
  this program keeps track of certain process's smap.  
  although smap doesn't offer you best information about memory being used  
  it's possible to make accurate guess of flow of memory in your process.  
+ 
+### C_snippets  
+ ##### null_checked_sprintf
+ sprintf~ like functions results in undefiend behavior when NULL input is given.  
+ This function can check for NULL values before running sprintf~ like functions(va_args, va_list, etc)  
  
