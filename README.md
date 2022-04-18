@@ -28,10 +28,17 @@
  ##### Smaptrack  
  this program keeps track of certain process's smap.  
  although smap doesn't offer you best information about memory being used  
- it's possible to make accurate guess of flow of memory in your process.  
+ it's possible to make quite accurate guesses on the flow of memory in your process.  
  
 ### C_snippets  
  ##### null_checked_sprintf
  sprintf~ like functions results in undefiend behavior when NULL input is given.  
- This function can check for NULL values before running sprintf~ like functions(va_args, va_list, etc)  
+ This function can check for NULL values before running sprintf~ like functions
+ (implented through va_args, va_list, etc)
+
+ ##### daemon
+ simple illustration of creating a daemon process.
+ Detaching terminal, session leader operations, redirecting stdios and logging pid.
+
+ 
  
