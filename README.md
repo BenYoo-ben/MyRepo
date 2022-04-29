@@ -40,5 +40,7 @@
  simple illustration of creating a daemon process.
  Detaching terminal, session leader operations, redirecting stdios and logging pid.
 
- 
+ ##### SystemResourceCheck
+ A shell script for quick anlysis of current system usage. 
+ Checks: load average, cpu usage, memory usage, zombie/dead processes and etc. 
  
