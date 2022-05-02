@@ -4,137 +4,132 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 #include <stdlib.h>
-
+#include <stdint.h>
 
 int main(int argc, char *argv[]) {
-
-	int BUFFS =1024;
-	if (argc != 4 && argc != 5 && argc !=6) {
-		printf("Usage: %s [MODE 0=S] [FILENAME] [# Port] [# BUFF_SIZE Default = 1024] [server_addr, only if in mode 1] \n",
-				argv[0]);
-		exit(1);
-	}
-
-
-	BUFFS = atoi(argv[4]);
-	printf("BUFFER set to %d\n",BUFFS);
+    int BUFFS = 1024;
+    if (argc != 4 && argc != 5 && argc != 6) {
+        printf("Usage: %s [MODE 0=S] [FILENAME] [# Port] "
+                "[# BUFF_SIZE Default = 1024]"
+                "[server_addr, only if in mode 1] \n", argv[0]);
+        exit(1);
+    }
 
 
-	int mode = atoi(argv[1]);
+    BUFFS = atoi(argv[4]);
+    printf("BUFFER set to %d\n", BUFFS);
 
-	if (mode == 0) {
-		printf("Server start ... \n");
 
-		int fd = socket(AF_INET, SOCK_STREAM, 0);
-		if (fd < 0)
-			perror("sock fail\n");
+    int mode = atoi(argv[1]);
 
-		struct sockaddr_in caddr;
-		struct sockaddr_in saddr;
+    if (mode == 0) {
+        printf("Server start ... \n");
 
-		memset(&caddr, 0x0, sizeof(caddr));
-		memset(&saddr, 0x0, sizeof(saddr));
+        int fd = socket(AF_INET, SOCK_STREAM, 0);
+        if (fd < 0)
+            perror("sock fail\n");
 
-		socklen_t clen = sizeof(caddr);
+        struct sockaddr_in caddr;
+        struct sockaddr_in saddr;
 
-		saddr.sin_family = AF_INET;
-		saddr.sin_addr.s_addr = htonl(INADDR_ANY);
-		saddr.sin_port = htons(atoi(argv[3]));
+        memset(&caddr, 0x0, sizeof(caddr));
+        memset(&saddr, 0x0, sizeof(saddr));
 
-		if (bind(fd, (struct sockaddr*) &saddr, sizeof(saddr)) < 0)
-			perror("bind err\n");
+        socklen_t clen = sizeof(caddr);
 
-		if (listen(fd, 1) == -1)
-			perror("liten err\n");
+        saddr.sin_family = AF_INET;
+        saddr.sin_addr.s_addr = htonl(INADDR_ANY);
+        saddr.sin_port = htons(atoi(argv[3]));
 
-		int cfd = accept(fd, (struct sockaddr*) &caddr, &clen);
-		if (cfd < 0)
-			perror("accept err\n");
+        if (bind(fd, (struct sockaddr*) &saddr, sizeof(saddr)) < 0)
+            perror("bind err\n");
 
-		printf("accept.\n");
+        if (listen(fd, 1) == -1)
+            perror("liten err\n");
 
-		FILE *fp = fopen(argv[2], "wb");
+        int cfd = accept(fd, (struct sockaddr*) &caddr, &clen);
+        if (cfd < 0)
+            perror("accept err\n");
 
-		char buffer[BUFFS];
-		ssize_t size_read = -1;
-		int written = 0;
+        printf("accept.\n");
 
-		short write_flag = 0;
+        FILE *fp = fopen(argv[2], "wb");
 
-		while (!write_flag) {
-			size_read = read(cfd, buffer, (size_t) sizeof(buffer));
+        char buffer[BUFFS];
+        ssize_t size_read = -1;
+        int written = 0;
 
-			if (size_read > 0) {
-				fwrite(buffer, size_read, 1, fp);
-				written += size_read;
-			} else if (size_read <= 0) {
+        int16_t write_flag = 0;
 
-				write_flag = 1;
-				perror("read interrupt\n");
-			}
+        while (!write_flag) {
+            size_read = read(cfd, buffer, (size_t)sizeof(buffer));
 
-			printf("%d received\n", written);
-			size_read = -1;
-			memset(buffer, 0x0, sizeof(buffer));
-		}
-		fclose(fp);
-		close(cfd);
-		close(fd);
-		exit(0);
-	} else if (mode == 1) {
-		printf("Client start ... \n");
+            if (size_read > 0) {
+                fwrite(buffer, size_read, 1, fp);
+                written += size_read;
+            } else if (size_read <= 0) {
+                write_flag = 1;
+                perror("read interrupt\n");
+            }
 
-		int fd = socket(AF_INET, SOCK_STREAM, 0);
-		if (fd < 0)
-			perror("sock fail\n");
+            printf("%d received\n", written);
+            size_read = -1;
+            memset(buffer, 0x0, sizeof(buffer));
+        }
+        fclose(fp);
+        close(cfd);
+        close(fd);
+        exit(0);
+    } else if (mode == 1) {
+        printf("Client start ... \n");
 
-		struct sockaddr_in saddr;
+        int fd = socket(AF_INET, SOCK_STREAM, 0);
+        if (fd < 0)
+            perror("sock fail\n");
 
-		memset(&saddr, 0x0, sizeof(saddr));
+        struct sockaddr_in saddr;
 
-		saddr.sin_family = AF_INET;
-		saddr.sin_addr.s_addr = inet_addr(argv[5]);
-		saddr.sin_port = htons(atoi(argv[3]));
+        memset(&saddr, 0x0, sizeof(saddr));
 
-		if (-1 == connect(fd, (struct sockaddr*) &saddr, sizeof(saddr))) {
-			perror("conn fail\n");
-			exit(1);
-		}
+        saddr.sin_family = AF_INET;
+        saddr.sin_addr.s_addr = inet_addr(argv[5]);
+        saddr.sin_port = htons(atoi(argv[3]));
 
-		printf("connect.\n");
+        if (-1 == connect(fd, (struct sockaddr*) &saddr, sizeof(saddr))) {
+            perror("conn fail\n");
+            exit(1);
+        }
 
-		FILE *fp = fopen(argv[2], "rb");
-		if (fp == NULL)
-			perror("no file\n");
+        printf("connect.\n");
 
-		char buffer[BUFFS];
-		int f_read = 0;
-		int so_far_read = 0;
-		short read_flag =  0;
-		while (!read_flag) {
+        FILE *fp = fopen(argv[2], "rb");
+        if (fp == NULL)
+            perror("no file\n");
 
-			f_read = fread(buffer, 1, BUFFS, fp);
+        char buffer[BUFFS];
+        int f_read = 0;
+        int so_far_read = 0;
+        int16_t read_flag =  0;
+        while (!read_flag) {
+            f_read = fread(buffer, 1, BUFFS, fp);
 
-			if (f_read > 0) {
-				if (f_read != write(fd, buffer, f_read)) {
-					perror("read=>write sync fail.\n");
-					exit(1);
-				} else {
-					so_far_read += f_read;
-				}
-			}
-			else
-			{
-				read_flag=1;
-			}
+            if (f_read > 0) {
+                if (f_read != write(fd, buffer, f_read)) {
+                    perror("read=>write sync fail.\n");
+                    exit(1);
+                } else {
+                    so_far_read += f_read;
+                }
+            } else {
+                read_flag = 1;
+            }
 
-			printf("%d sent\n", so_far_read);
-			f_read = -1;
-			memset(buffer, 0x0, sizeof(buffer));
-
-		}
-		fclose(fp);
-		close(fd);
-		exit(0);
-	}
+            printf("%d sent\n", so_far_read);
+            f_read = -1;
+            memset(buffer, 0x0, sizeof(buffer));
+        }
+        fclose(fp);
+        close(fd);
+        exit(0);
+    }
 }
